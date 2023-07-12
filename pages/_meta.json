@@ -1,5 +1,4 @@
 {
-
   "index": "Welcome",
   "introduction": "Introduction",
   "background": "Background",
@@ -7,7 +6,7 @@
   "api-reference": "API-Reference",
   "how-to": "How-to Guides",
   "swagger": "Swagger ↗",
-  "how-to": "How-to",
+  "developer-resources": "Developer Resources",
   "dashboard": {
     "title": "API Key ↗",
     "type": "page",
