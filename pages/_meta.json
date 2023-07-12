@@ -8,14 +8,16 @@
   "how-to": "How-to Guides",
   "swagger": "Swagger ↗",
   "how-to": "How-to",
-  "about": {
-    "title": "About",
-    "type": "page"
+  "dashboard": {
+    "title": "API Key ↗",
+    "type": "page",
+    "href": "https://www.enso.finance/developers",
+    "newWindow": true
   },
   "contact": {
-    "title": "Contact ↗",
+    "title": "Dev Chat ↗",
     "type": "page",
-    "href": "https://discord.com/invite/enso-finance",
+    "href": "https://t.me/enso_api",
     "newWindow": true
   }
 }
