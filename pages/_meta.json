@@ -1,13 +1,15 @@
 {
-
   "index": "Welcome",
   "introduction": "Introduction",
   "background": "Background",
   "get-started": "Get-Started",
   "api-reference": "API-Reference",
   "how-to": "How-to Guides",
-  "swagger": "Swagger ↗",
-  "how-to": "How-to",
+  "swagger": {
+    "title": "Swagger ↗",
+    "href": "https://api.enso.finance/api#/",
+    "newWindow": true
+  },
   "about": {
     "title": "About",
     "type": "page"
