@@ -1,0 +1,90 @@
+# Deposit
+
+## Summary
+
+Depositing is the action for taking funds from the callers wallet into a particular protocol.
+
+1. For many cases you can directly use the [route endpoint](./route.md) to enter into a position than directly using the deposit action.  The route endpoint will determine best price and gas execution for either depositing directly into the protocol, or buying the position token on a secondary market.  
+2. If you are depositing into a protocol you must have the underlying token required for the deposit action.  For example if you are attempting to deposit into a Yearn vault that requires WETH and you define DAI as the tokenIn then the transaction will fail.  This is a perfect use case for using the [route](./route.md) endpoint.  
+
+
+## Example of Abstraction
+Entering into a position is applicable to many protocols.
+
+### Before
+Each protocol has different function signatures for this for example:
+> **balancer**: joinPool(bytes32 poolId, address sender, address recipient, (address[] assets, uint256[] maxAmountsIn, bytes userData, bool fromInternalBalance)
+
+> **uniswap**: addLiquidity(address tokenA,address tokenB,uint amountADesired,uint amountBDesired,uint amountAMin,uint amountBMin,address to,uint deadline) external returns (uint amountA, uint amountB, uint liquidity)
+
+> **beefy**: deposit(uint256)
+
+> **morpho**: supply(address poolToken, address user, uint256 amount)'
+
+### After
+
+With Enso you can simply use Deposit for all protocols resulting in quick, and easy integration with all the logic for each particular protocol deposit logic abstracted away.
+
+You can use the deposit action inside of the [bundle endpoint](./bundleEndpoint).
+```
+{
+    protocol: "morpho",
+    args: {
+        tokenIn: weth,
+        tokenOut: b80bal20weth, 
+        amountIn: wethAmount
+        primaryAddress: morphoVault
+    },
+    action: "deposit",
+},
+```
+
+```javascript
+tokenIn: 'Address of token to send'  // You can define many tokens in by [inToken1, inToken2]
+?tokenOut: 'Address of token to receive'  // Optional - protocols that have isolated contracts per each deposit(for example Yearn), then you do not need to define tokenOut.  For protocols that have a shared contract for all of their vaults/deposits such as balancer and univ4 then you should define tokenOut
+amountIn: 'Raw amount to send'   // You can define mancy tokens out by [outToken1, outToken2]
+primaryAddress: 'Address of smart contract to interact with' // Address of smart contract to interact with
+```
+
+
+## Endpoints
+
+### GET [TODO]()
+Get all the protocols that have a deposit action
+
+### POST [/api/v1/shortcuts/bundle](https://api.enso.finance/api#/shortcuts/BundleController_bundleShortcutTransaction)
+
+The bundle endpoint enables bundling of many actions into one transaction, and for the examples below we will simply do one action of deposit.
+
+
+Convert from [USDC](0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) to [yvUSDC](0xa354f35829ae975e850e23e9615b11da1b3dc4de) assuming the user has USDC in their wallet.  More more efficiency it is advised to use the [route endpoint](./route.md) for these types of actions
+```
+curl --request POST \
+     --url 'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0x7713974908Be4BEd47172370115e8b1219F4A5f0' \
+     --header 'content-type: application/json' \
+     --data '
+[
+  {
+    "action": "deposit",
+    "args": {
+      "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "tokenOut": "0xa354f35829ae975e850e23e9615b11da1b3dc4de",
+      "amountIn": "1000000000000000000",
+      "primaryAddress": "0xa354f35829ae975e850e23e9615b11da1b3dc4de"
+    },
+    "protocol": "yearn-finance"
+  }
+]
+'
+```
+
+
+
+# TODO/QUESTIONS
+
+1. tokenOut: b80bal20weth. Why is this needed?  We can simply know from the token that's being deposited the mapping into the defi token that the user will get back after executing..
+2. Create endpoint with: depositToken(weth), protocol(morpho), action(deposit) to know that if you deposit WETH then you get a specific pool token back
+3. Example how to use the return value from a function call into the next one
+4. GET endpoint for fetching all the protocols with deposit standard, and the relevant metadata associated required to do
+5. Need to update swagger to allow args to be passed.  Additionally, need to update args on(https://docs.enso.finance/reference/bundlecontroller_bundleshortcuttransaction-1) to show arg names as right now it's displayed as `newKey`, `newKey-1` etc..
+6. Why is yearn categorized as yearn-finance?

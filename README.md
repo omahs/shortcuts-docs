@@ -1,5 +1,9 @@
 # Enso API Docs
 
+## Requirements
+
+`Node V18.10.0+`
+
 ## Local Development
 
 First, run `pnpm i` to install the dependencies.
