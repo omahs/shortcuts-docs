@@ -77,14 +77,3 @@ curl --request POST \
 ]
 '
 ```
-
-
-
-# TODO/QUESTIONS
-
-1. tokenOut: b80bal20weth. Why is this needed?  We can simply know from the token that's being deposited the mapping into the defi token that the user will get back after executing..
-2. Create endpoint with: depositToken(weth), protocol(morpho), action(deposit) to know that if you deposit WETH then you get a specific pool token back
-3. Example how to use the return value from a function call into the next one
-4. GET endpoint for fetching all the protocols with deposit standard, and the relevant metadata associated required to do
-5. Need to update swagger to allow args to be passed.  Additionally, need to update args on(https://docs.enso.finance/reference/bundlecontroller_bundleshortcuttransaction-1) to show arg names as right now it's displayed as `newKey`, `newKey-1` etc..
-6. Why is yearn categorized as yearn-finance?
