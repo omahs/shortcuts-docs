@@ -1,11 +1,10 @@
 {
   "index": "Welcome",
   "introduction": "Introduction",
-  "background": "Background",
   "get-started": "Get-Started",
-  "api-reference": "API-Reference",
   "how-to": "How-to Guides",
-  "swagger": "Swagger ↗",
+  "api-reference": "API-Reference",
+  "background": "Background",
   "developer-resources": "Developer Resources",
   "dashboard": {
     "title": "API Key ↗",

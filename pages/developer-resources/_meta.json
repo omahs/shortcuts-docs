@@ -1,8 +1,14 @@
 {
-    "contact": {
+    "status": {
         "title": "Status ↗",
         "type": "page",
         "href": "https://status.enso.finance/",
+        "newWindow": true
+    },
+    "swagger": {
+        "title": "Swagger ↗",
+        "type": "page",
+        "href": "https://api.enso.finance/api#/",
         "newWindow": true
     }
 }
