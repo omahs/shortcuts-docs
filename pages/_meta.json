@@ -14,10 +14,16 @@
     "title": "About",
     "type": "page"
   },
-  "contact": {
-    "title": "Contact ↗",
+  "dashboard": {
+    "title": "API Key ↗",
     "type": "page",
-    "href": "https://discord.com/invite/enso-finance",
+    "href": "https://www.enso.finance/developers",
+    "newWindow": true
+  },
+  "contact": {
+    "title": "Dev Chat ↗",
+    "type": "page",
+    "href": "https://t.me/enso_api",
     "newWindow": true
   }
 }
