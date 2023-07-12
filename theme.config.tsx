@@ -18,12 +18,12 @@ const config: DocsThemeConfig = {
     next: true,
   },
   project: {
-    link: "https://github.com/shuding/nextra-docs-template",
+    link: "https://enso.finance",
   },
   chat: {
-    link: "https://discord.com/invite/enso-finance",
+    link: "https://t.me/enso_api",
   },
-  docsRepositoryBase: "https://github.com/shuding/nextra-docs-template",
+  docsRepositoryBase: "https://github.com/EnsoFinance/shortcuts-docs",
   footer: {
     text: "Enso Shortcuts Registry Docs",
   },
