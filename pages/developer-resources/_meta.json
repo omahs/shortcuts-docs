@@ -10,5 +10,17 @@
         "type": "page",
         "href": "https://api.enso.finance/api#/",
         "newWindow": true
+    },
+    "audits": {
+        "title": "Audits ↗",
+        "type": "page",
+        "href": "https://github.com/EnsoFinance/enso-audits",
+        "newWindow": true
+    },
+    "legal": {
+        "title": "Legal ↗",
+        "type": "page",
+        "href": "https://drive.google.com/file/d/1Z_szzLwwLqx9v6liyslKsos75I17obDS/view?usp=sharing",
+        "newWindow": true
     }
 }
