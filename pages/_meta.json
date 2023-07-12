@@ -3,16 +3,13 @@
   "introduction": "Introduction",
   "background": "Background",
   "get-started": "Get-Started",
-  "api-reference": "API-Reference",
+  "execution-api": "Execution API",
+  "metadata-api": "Metadata API",
   "how-to": "How-to Guides",
   "swagger": {
     "title": "Swagger ↗",
     "href": "https://api.enso.finance/api#/",
     "newWindow": true
-  },
-  "about": {
-    "title": "About",
-    "type": "page"
   },
   "dashboard": {
     "title": "API Key ↗",
@@ -25,5 +22,9 @@
     "type": "page",
     "href": "https://t.me/enso_api",
     "newWindow": true
+  },
+  "about": {
+    "title": "About",
+    "type": "page"
   }
 }
