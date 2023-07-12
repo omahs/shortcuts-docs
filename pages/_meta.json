@@ -1,5 +1,7 @@
 {
-  "index": "Introduction",
+
+  "index": "Welcome",
+  "introduction": "Introduction",
   "background": "Background",
   "get-started": "Get-Started",
   "api-reference": "API-Reference",
