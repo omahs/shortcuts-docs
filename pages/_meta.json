@@ -1,7 +1,6 @@
 {
   "index": "Welcome",
   "introduction": "Introduction",
-  "background": "Background",
   "get-started": "Get-Started",
   "execution-api": "Execution API",
   "metadata-api": "Metadata API",
@@ -11,6 +10,8 @@
     "href": "https://api.enso.finance/api#/",
     "newWindow": true
   },
+  "background": "Background",
+  "developer-resources": "Developer Resources",
   "dashboard": {
     "title": "API Key ↗",
     "type": "page",
