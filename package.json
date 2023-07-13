@@ -15,8 +15,8 @@
   "homepage": "https://docs.enso.finance",
   "dependencies": {
     "next": "^13.0.6",
-    "nextra": "latest",
-    "nextra-theme-docs": "latest",
+    "nextra": "^2.9.0",
+    "nextra-theme-docs": "^2.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
