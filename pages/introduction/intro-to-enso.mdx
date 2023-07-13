@@ -1,5 +1,8 @@
 import Image from "next/image";
 import overview_img from "../../assets/overview.png";
+import eoa_img from "../../assets/eoa.png";
+import smart_img from "../../assets/smartWallet.png";
+
 
 # Introduction to Enso
 
@@ -38,11 +41,17 @@ An example of a actions being bundled together can be viewed in the [actions](..
 
 Applications that enable EOAs to interact with their platform can utilize Enso for all [Tokenized Interactions](../background/tokenizedVsNonTokenized/tokenized.mdx).
 
+All interactions that are done from an EOA account will result in the corresponding tokens being sent to the EOA account.  For example, if a user swaps 10 tokens, the 10 tokens will be sent to the EOA account.
+
+<center><Image src={eoa_img} alt="Key" width={500} height={500} /></center>
 
 
+### Contract Account(Smart Wallet) Interactions
 
-### Smart Wallet Interactions
+Applications that enable Smart Wallets to interact with their platform can utilize Enso for all [Tokenized Interactions](../background/tokenizedVsNonTokenized/tokenized.mdx) and [Non-Tokenized Interactions](../background/tokenizedVsNonTokenized/nonTokenized.mdx).
 
+
+<center><Image src={smart_img} alt="Key" width={500} height={500} /></center>
 
 
 ## What can I build on Enso?
