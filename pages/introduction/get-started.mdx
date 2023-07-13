@@ -1,0 +1,54 @@
+import Image from "next/image";
+import signup_img from "../../assets/signup.png";
+import key_img from "../../assets/key.png";
+
+# Getting Started
+
+The Enso suite of APIs is the simplest way to enable DeFi integrations, better prices, better gas execution, transaction bundling, and impecible UX in your app.  To get started, you will need to set up an account to access the [Enso Dashboard](https://www.enso.finance/developers) in order to generate an API key for your project. 
+
+Follow these steps to get started, in less than 5 minutes!
+
+
+## Step 1: Create an Enso Account
+
+To create an account on the [Enso Dashboard](https://www.enso.finance/developers) click **Continue with Google**, select your email, and **click on the email** you wish to sign-up with.
+
+<center><Image src={signup_img} alt="Signup" width={500} height={500} /></center>
+
+
+## Step 2: Copy API key
+
+Copy your API key by pressing **Copy API Key**.  If at any stage you wish to generate a new key, you can press **Generate New Key**, and your old key will be deactivated.
+
+<center><Image src={key_img} alt="Key" width={500} height={500} /></center>
+
+
+## Step 3: Test the API Key
+
+Once you've created your key test the [route endpoint](../background/actions/route.mdx).
+
+To find all the networks support by Enso, use the [networks endpoint](../background/networks.mdx).
+
+
+```
+// Replace the API key in the header with your API key
+curl --request POST \
+     --url 'http://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0x9008D19f58AAbD9eD0D60971565AA8510560ab41&tokenIn=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2&tokenOut=0x5c6Ee304399DBdB9C8Ef030aB642B10820DB8F56&amountIn=326880000000000000000&tokenInAmountToTransfer=326880000000000000000' \
+     --header 'content-type: application/json' \
+     --header 'Authorization: Bearer <API_KEY>'
+```
+
+
+## Step 4: Have a question or improvement?
+
+1. Read the [docs](https://docs.enso.finance)
+2. Join our developer [telegram channel](https://t.me/enso_api)
+3. Suggest doc improvements on our [github](https://github.com/EnsoFinance/shortcuts-docs) // TODO; need to add template on github for improvements
+
+
+## Step 5: Start building
+
+You now have a live API key, so lesssgo and build extremely powerful apps that use DeFi!
+
+1. Bundle API
+2. Different APIs here references
