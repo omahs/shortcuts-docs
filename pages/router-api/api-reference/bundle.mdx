@@ -1,0 +1,67 @@
+## POST /v1/shortcuts/bundle
+
+### Request
+
+#### Query Parameters:
+
+| Query Param   | Description                                                                                         | Example                    |
+| ------------- | --------------------------------------------------------------------------------------------------- | -------------------------- |
+| `fromAddress` | Ethereum address of the wallet to send the transaction from (It could be an EoA, or a Smart Wallet) | tokenIn=0x6b175474e8909... |
+| `chainId`     | (Optional) The chainId of the network. Default value is 1 for Mainnet                               | chainId=1                  |
+
+#### Body:
+
+An array of objects (specific actions) with the following structure:
+
+```json
+[
+  {
+    "protocol": "", // protocol name (e.g. "yearn")
+    "action": "", // action name (e.g. "deposit")
+    "args": {} // Arguments of the action
+  }
+]
+```
+
+Args are action specific and you can find them in the [Actions](#actions) section.
+A simple example for the route actions can be:
+
+```json
+{
+  "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", // ETH
+  "tokenOut": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84", // stETH
+  "amountIn": 10000000000
+}
+```
+
+## Examples
+
+Bundle multiple route actions in a single transaction.
+Route specific amounts of Ether into stEth and steCrv (a Curve LP token)
+
+Both transactions are bundled together in a single one.
+
+```bash
+curl -X POST 'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=<your_chainId>&fromAddress=<your_fromAddress>' \
+-H 'Content-Type: application/json' \
+-d [
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "tokenOut": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
+      "amountIn": "1000000000"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "tokenOut": "0x06325440d014e39736583c165c2963ba99faf14e",
+      "amountIn": "1000000000"
+    }
+  }
+]
+```

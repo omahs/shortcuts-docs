@@ -1,31 +1,89 @@
 ## GET /v1/shortcuts/route
 
-#### Request
+Use this endpoint to calculate an optimal route for entering or exiting any DeFi position or swapping any ERC20 tokens.
+The API takes into account various DeFi protocols and Exchanges to determine the best path.
 
-| Query Param               | Description                                                                                                           | Example                                |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| `tokenIn`                 | Ethereum address of the token to swap or enter into a position from                                                   | tokenIn=0x6b175474e8909...             |
-| `amountIn`                | Amount of tokenIn to swap in wei                                                                                      | amountIn=100000000000                  |
-| `tokenOut`                | Ethereum address of the token to swap or enter into a position to                                                     | tokenOut= 0x182b723a587...             |
-| `toEOA`                   | Flag that indicates if gained tokenOut should be sent to EOA                                                          | toEOA=true                             |
-| `tokenInAmountToApprove`  | If entering with EOA, Amount of tokenIn (ERC20) that needs to be approved to the wallet before the transaction in wei | tokenInAmountToApprove= 100000000000   |
-| `tokenInAmountToTransfer` | If entering with EOA, Amount of tokenIn (Ether) that needs to be approved to the wallet before the transaction in wei | tokenInAmountToTransfer = 100000000000 |
-| `priceImpact`             | Flag that indicates whether to calculate and return the price impact of the transaction                               | priceImpact=true                       |
-| `chainId`                 | (Optional, default value is 1 for Mainnet) The chainId of the network                                                 | chainId=1                              |
-| `slippage`                | (Optional, default value is 300 for 3%) Slippage in basis points                                                      | slippage=100 (1%)                      |
+The route comes with a transaction object (tx), ready for submission to an Ethereum node.
+This transaction is a valid, unsigned Ethereum transaction that can be used to execute the recommended route. If tokenIn is not ETH, remember to set your allowances.
 
-#### Response
+Alongside the route and transaction, the API also returns a simulation of the transaction.
+This simulation gives you a comprehensive quote, detailing expected gas costs, returns, and potential price impact.
 
-| Query Param     | Description                                                                                                           |
-| --------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `tokenIn`       | Ethereum address of the token to swap or enter into a position from                                                   |
-| `positionInId`  | Amount of tokenIn to swap in wei                                                                                      |
-| `tokenOut`      | Ethereum address of the token to swap or enter into a position to                                                     |
-| `positionOutId` | Flag that indicates if gained tokenOut should be sent to EOA                                                          |
-| `protocol`      | If entering with EOA, Amount of tokenIn (ERC20) that needs to be approved to the wallet before the transaction in wei |
-| `action`        | If entering with EOA, Amount of tokenIn (Ether) that needs to be approved to the wallet before the transaction in wei |
-| `gas`           | Flag that indicates whether to calculate and return the price impact of the transaction                               |
-| `amountOut`     | (Optional, default value is 1 for Mainnet) The chainId of the network                                                 |
-| `priceImpact`   | (Optional, default value is 300 for 3%) Slippage in basis points                                                      |
-| `createdAt`     | Block number the transaction was created on                                                                           |
-| `tx`            | The tx object to use in ethers. Contains sub-parameters: <br/> -`data`<br/> -`to` <br/>-`from` <br/>-`value`          |
+### Request
+
+| Query Param               | Description                                                                                                                      | Example                                |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `fromAddress`             | Ethereum address of the wallet to send the transaction from (It could be an EoA, or a Smart Wallet)                              | tokenIn=0x6b175474e8909...             |
+| `tokenIn`                 | Ethereum address of the token to swap or enter into a position from                                                              | tokenIn=0x6b175474e8909...             |
+| `amountIn`                | Amount of tokenIn to swap in wei                                                                                                 | amountIn=100000000000                  |
+| `tokenOut`                | Ethereum address of the token to swap or enter into a position to                                                                | tokenOut= 0x182b723a587...             |
+| `toEOA`                   | Flag that indicates if gained tokenOut should be sent to EOA                                                                     | toEOA=true                             |
+| `priceImpact`             | Flag that indicates whether to calculate and return the price impact of the transaction                                          | priceImpact=true                       |
+| `chainId`                 | (Optional) The chainId of the network. Default value is 1 for Mainnet                                                            | chainId=1                              |
+| `slippage`                | (Optional) Slippage in basis points. Default value is 300 for 3%                                                                 | slippage=100 (1%)                      |
+| `tokenInAmountToApprove`  | (Optional) If entering with EOA, Amount of tokenIn (ERC20) that needs to be approved to the wallet before the transaction in wei | tokenInAmountToApprove= 100000000000   |
+| `tokenInAmountToTransfer` | (Optional) If entering with EOA, Amount of tokenIn (Ether) that needs to be approved to the wallet before the transaction in wei | tokenInAmountToTransfer = 100000000000 |
+
+### Response
+
+It returns an array of objects.
+The tx objects gives you the transaction to use in ethers. The other fields are a result of a transaction simulation.
+
+| Query Param   | Description                                                                                                                                |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `route`       | An Array of objects containig: <br/> `tokenIn` <br/> `positionInId` <br/> `tokenOut` <br/> `positionOutId` <br/> `protocol` <br/> `action` |
+| `tokenIn`     | Ethereum address of the token to swap or enter into a position from                                                                        |
+| `gas`         | Estimated gas used by the transaction                                                                                                      |
+| `amountOut`   | Estimated amount out received                                                                                                              |
+| `priceImpact` | Price impact in basis points, null if USD price not found                                                                                  |
+| `createdAt`   | Block number the transaction was created on                                                                                                |
+| `tx`          | The tx object to use in ethers. Contains sub-parameters: <br/> -`data`<br/> -`to` <br/>-`from` <br/>-`value`                               |
+
+### Examples
+
+#### Simple ETH to stETH
+
+Spend Ether from the EOA and get stETH in return.
+
+Specify a tokenIn (ETH), tokenOut (stETH) and either a sellAmount to get a route of 1 ETH for WETH.
+The route endpoint will calculate the best route for you, choosing between all the avilable AMM's and protocols (E.g. depositing directly to Lido).
+
+If depositing directly to LIDO is the best route the tx object will contain the data to call the deposit function on the LIDO contract, otherwise it will contain the data to call the best AMM.
+
+#### Request:
+
+```url
+https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&priceImpact=false&toEoa=true&amountIn=1000000000000000000&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&tokenOut=0xae7ab96520de3a18e5e111b5eaab095312d7fe84
+```
+
+#### Response:
+
+```json
+{
+  "createdAt": 17685529,
+  "route": [
+    {
+      "action": "deposit",
+      "primary": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
+      "protocol": "lido",
+      "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "tokenOut": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
+      "positionInId": "1:0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "positionOutId": "1:0xae7ab96520de3a18e5e111b5eaab095312d7fe84:0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    }
+  ],
+  "priceImpact": 0,
+  "gas": 380972,
+  "amountOut": "999999999999999999",
+  "tx": {
+    "data": "0xffa2ca3bd8db9899f8ab9c791038422daf4d50db28b4905b8781b8b39dd3c08cfe0bec1d000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000001c0000000000000000000000000000000000000000000000000000000000000000a70a082310100ffffffffff05ae7ab96520de3a18e5e111b5eaab095312d7fe8470a082310100ffffffffff06ae7ab96520de3a18e5e111b5eaab095312d7fe84a1903eab030102ffffffffffae7ab96520de3a18e5e111b5eaab095312d7fe8470a082310100ffffffffff02ae7ab96520de3a18e5e111b5eaab095312d7fe84b67d77c5010206ffffffff02ca99eaa38e8f37a168214a3a57c9a45a58563ed56e7a43a3010203ffffffff027e7d64d987cab6eed08a191c4c2459daf2f8ed0b241c59120102ffffffffffff7e7d64d987cab6eed08a191c4c2459daf2f8ed0b70a082310100ffffffffff00ae7ab96520de3a18e5e111b5eaab095312d7fe84b67d77c5010005ffffffff00742f2c5d96c0858d00860039c22d2805bed420e8a9059cbb010400ffffffffffae7ab96520de3a18e5e111b5eaab095312d7fe84000000000000000000000000000000000000000000000000000000000000000700000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000120000000000000000000000000000000000000000000000000000000000000016000000000000000000000000000000000000000000000000000000000000001a000000000000000000000000000000000000000000000000000000000000001e000000000000000000000000000000000000000000000000000000000000002200000000000000000000000000000000000000000000000000000000000000240000000000000000000000000000000000000000000000000000000000000002000000000000000000000000089ba58cc0e8bcbc1108dbd6f33356a136a021c6200000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000d7621dc5820ffff0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa9604500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "to": "0x7fEA6786D291A87fC4C98aFCCc5A5d3cFC36bc7b",
+    "from": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+    "value": "1000000000000000000"
+  }
+}
+```
+
+#### Approval flow to spend ERC20 tokens from an EoA
+
+#### Multi-tokens swap
