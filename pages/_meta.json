@@ -1,8 +1,15 @@
 {
   "index": "Welcome",
   "introduction": "Introduction",
+  "get-started": "Get-Started",
+  "router-api": "Router API",
+  "metadata-api": "Metadata API",
   "how-to": "How-to Guides",
-  "api-reference": "API-Reference",
+  "swagger": {
+    "title": "Swagger ↗",
+    "href": "https://api.enso.finance/api#/",
+    "newWindow": true
+  },
   "background": "Background",
   "developer-resources": "Developer Resources",
   "dashboard": {
@@ -16,5 +23,9 @@
     "type": "page",
     "href": "https://t.me/enso_api",
     "newWindow": true
+  },
+  "about": {
+    "title": "About",
+    "type": "page"
   }
 }
