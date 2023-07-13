@@ -4,16 +4,13 @@
 
 Actions are standardized interactions related to contract calls, allowing for quick development integration than requiring to handle each individual function signature for each protocol, you can simply use these actions for interacting which associates the function calls of aprotocol.
 
-
 ## Example of Abstraction
 
 Entering into a position is applicable to many protocols, and each protocol function signatures are different, for example:  
 `balancer`:`joinPool`  
-`uniswap`:`addLiquidity`  
-
+`uniswap`:`addLiquidity`
 
 With Enso API if you wish to join a pool on either `Balancer` or `Uniswap` your can simply use the `deposit` standard.
-
 
 ## Endpoints
 
@@ -21,15 +18,16 @@ With Enso API if you wish to join a pool on either `Balancer` or `Uniswap` your 
 
 The actions endpoint returns all actions that are applicable to be used within the Enso API for convenience, however you can still do arbitrary calls if there are standards missing for the actions you'd like to complete which can be [seen here](./here).
 
-Try it out:
-```
-// Replace API key in the header with your own key from https://www.enso.finance/developers
+## Try it out:
+
+```bash
 curl -X 'GET' \
   'https://api.enso.finance/api/v1/actions' \
    --header 'Api-Token: xxxx'
 ```
 
 You will receive a response that looks like this:
+
 ```json
 [
   {
@@ -40,25 +38,25 @@ You will receive a response that looks like this:
       "primaryAddress": "Address of smart contract to interact with"
     },
     "name": "deposit"
-  },
+  }
 ]
 ```
+
 Which returns the list of actions, and inputs required for each action.
 
+As of actions that Enso API currently supports is:
 
-As of actions that Enso API currently supports is:  
-> 1. [Route](./actions/route)  
-> 2. [Deposit](./actions/deposit)  
-> 3. [Harvest](./actions/harvest)  
-> 4. [Borrow](./actions/borrow)   
-> 5. [Repay](./actions/repay)  
-> 6. [Redeem](./actions/redeem)  
-> 7. [Apiswap](./actions/apiswap)  
-> 8. [Swap](./actions/swap)  
-> 9. [Transfer](./actions/transfer)  
-> 10. [Withdraw](./actions/withdraw)  
-> 11. [Approve](./actions/approve)  
-> 12. [PermitTransferFrom](./actions/permittransferfrom)  
-  
+> 1. [Route](./actions/route)
+> 2. [Deposit](./actions/deposit)
+> 3. [Harvest](./actions/harvest)
+> 4. [Borrow](./actions/borrow)
+> 5. [Repay](./actions/repay)
+> 6. [Redeem](./actions/redeem)
+> 7. [Apiswap](./actions/apiswap)
+> 8. [Swap](./actions/swap)
+> 9. [Transfer](./actions/transfer)
+> 10. [Withdraw](./actions/withdraw)
+> 11. [Approve](./actions/approve)
+> 12. [PermitTransferFrom](./actions/permittransferfrom)
 
 If you require an action to be supported, please open up an issue on [github](https://github.com/EnsoFinance)
