@@ -1,0 +1,27 @@
+## What is the Router API?
+
+Try it out:
+
+Let's say you want to go from Ether to a the steCrv Curve pool. Also, you want to deposit the Curve LP into the Curve Gauge.
+In the route endpoint you would simply pass a tokenIn (Ether), the amount and the tokenOut (the Curve Gauge).
+
+Enso will take care to swap your token in to the required token (if needed), deposit the LP into the Curve Gauge and stake the LP tokens into the Curve Gauge.
+
+`````bash copy
+
+
+````bash copy
+curl --request GET \
+     --url 'https://api.enso.finance/api/v1/shortcuts/route?chainId=1&tokenInAmountToApprove=0&tokenInAmountToTransfer=&priceImpact=true&toEoa=true&amountIn=1000000000000000000&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&tokenOut=0x182b723a58739a9c974cfdb385ceadb237453c28' \
+     --header 'accept: application/json'
+`````
+
+It will return:
+
+## Why to use?
+
+## How does it work?
+
+```
+
+```

@@ -1,15 +1,18 @@
 # Deposit
+
 Depositing is the action for taking funds from the callers wallet into a particular protocol.
 
-1. For many cases you can directly use the [route endpoint](./route.md) to enter into a position than directly using the deposit action.  The route endpoint will determine best price and gas execution for either depositing directly into the protocol, or buying the position token on a secondary market.  
-2. If you are depositing into a protocol you must have the underlying token required for the deposit action.  For example if you are attempting to deposit into a Yearn vault that requires WETH and you define DAI as the tokenIn then the transaction will fail.  This is a perfect use case for using the [route](./route.md) endpoint.  
-
+1. For many cases you can directly use the [route endpoint](./route.md) to enter into a position than directly using the deposit action. The route endpoint will determine best price and gas router for either depositing directly into the protocol, or buying the position token on a secondary market.
+2. If you are depositing into a protocol you must have the underlying token required for the deposit action. For example if you are attempting to deposit into a Yearn vault that requires WETH and you define DAI as the tokenIn then the transaction will fail. This is a perfect use case for using the [route](./route.md) endpoint.
 
 ## Example of Abstraction
+
 Entering into a position is applicable to many protocols.
 
 ### Before
+
 Each protocol has different function signatures for this for example:
+
 > **balancer**: joinPool(bytes32 poolId, address sender, address recipient, (address[] assets, uint256[] maxAmountsIn, bytes userData, bool fromInternalBalance)
 
 > **uniswap**: addLiquidity(address tokenA,address tokenB,uint amountADesired,uint amountBDesired,uint amountAMin,uint amountBMin,address to,uint deadline) external returns (uint amountA, uint amountB, uint liquidity)
@@ -23,12 +26,13 @@ Each protocol has different function signatures for this for example:
 With Enso you can simply use Deposit for all protocols resulting in quick, and easy integration with all the logic for each particular protocol deposit logic abstracted away.
 
 You can use the deposit action inside of the [bundle endpoint](../../api-reference/bundle).
+
 ```
 {
     protocol: "morpho",
     args: {
         tokenIn: weth,
-        tokenOut: b80bal20weth, 
+        tokenOut: b80bal20weth,
         amountIn: wethAmount
         primaryAddress: morphoVault
     },
@@ -37,24 +41,25 @@ You can use the deposit action inside of the [bundle endpoint](../../api-referen
 ```
 
 ```javascript
-tokenIn: 'Address of token to send'  // You can define many tokens in by [inToken1, inToken2]
-?tokenOut: 'Address of token to receive'  // Optional - protocols that have isolated contracts per each deposit(for example Yearn), then you do not need to define tokenOut.  For protocols that have a shared contract for all of their vaults/deposits such as balancer and univ4 then you should define tokenOut
-amountIn: 'Raw amount to send'   // You can define mancy tokens out by [outToken1, outToken2]
-primaryAddress: 'Address of smart contract to interact with' // Address of smart contract to interact with
+tokenIn: "Address of token to send" // You can define many tokens in by [inToken1, inToken2]
+  ? tokenOut
+  : "Address of token to receive"; // Optional - protocols that have isolated contracts per each deposit(for example Yearn), then you do not need to define tokenOut.  For protocols that have a shared contract for all of their vaults/deposits such as balancer and univ4 then you should define tokenOut
+amountIn: "Raw amount to send"; // You can define mancy tokens out by [outToken1, outToken2]
+primaryAddress: "Address of smart contract to interact with"; // Address of smart contract to interact with
 ```
-
 
 ## Endpoints
 
 ### GET
+
 Get all the protocols that have a deposit action
 
 ### POST [/api/v1/shortcuts/bundle](https://api.enso.finance/api#/shortcuts/BundleController_bundleShortcutTransaction)
 
 The bundle endpoint enables bundling of many actions into one transaction, and for the examples below we will simply do one action of deposit.
 
+Convert from [USDC](0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) to [yvUSDC](0xa354f35829ae975e850e23e9615b11da1b3dc4de) assuming the user has USDC in their wallet. More more efficiency it is advised to use the [route endpoint](./route.md) for these types of actions
 
-Convert from [USDC](0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) to [yvUSDC](0xa354f35829ae975e850e23e9615b11da1b3dc4de) assuming the user has USDC in their wallet.  More more efficiency it is advised to use the [route endpoint](./route.md) for these types of actions
 ```
 curl --request POST \
      --url 'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0x7713974908Be4BEd47172370115e8b1219F4A5f0' \

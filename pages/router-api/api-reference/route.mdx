@@ -1,0 +1,31 @@
+## GET /v1/shortcuts/route
+
+#### Request
+
+| Query Param               | Description                                                                                                           | Example                                |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `tokenIn`                 | Ethereum address of the token to swap or enter into a position from                                                   | tokenIn=0x6b175474e8909...             |
+| `amountIn`                | Amount of tokenIn to swap in wei                                                                                      | amountIn=100000000000                  |
+| `tokenOut`                | Ethereum address of the token to swap or enter into a position to                                                     | tokenOut= 0x182b723a587...             |
+| `toEOA`                   | Flag that indicates if gained tokenOut should be sent to EOA                                                          | toEOA=true                             |
+| `tokenInAmountToApprove`  | If entering with EOA, Amount of tokenIn (ERC20) that needs to be approved to the wallet before the transaction in wei | tokenInAmountToApprove= 100000000000   |
+| `tokenInAmountToTransfer` | If entering with EOA, Amount of tokenIn (Ether) that needs to be approved to the wallet before the transaction in wei | tokenInAmountToTransfer = 100000000000 |
+| `priceImpact`             | Flag that indicates whether to calculate and return the price impact of the transaction                               | priceImpact=true                       |
+| `chainId`                 | (Optional, default value is 1 for Mainnet) The chainId of the network                                                 | chainId=1                              |
+| `slippage`                | (Optional, default value is 300 for 3%) Slippage in basis points                                                      | slippage=100 (1%)                      |
+
+#### Response
+
+| Query Param     | Description                                                                                                           |
+| --------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `tokenIn`       | Ethereum address of the token to swap or enter into a position from                                                   |
+| `positionInId`  | Amount of tokenIn to swap in wei                                                                                      |
+| `tokenOut`      | Ethereum address of the token to swap or enter into a position to                                                     |
+| `positionOutId` | Flag that indicates if gained tokenOut should be sent to EOA                                                          |
+| `protocol`      | If entering with EOA, Amount of tokenIn (ERC20) that needs to be approved to the wallet before the transaction in wei |
+| `action`        | If entering with EOA, Amount of tokenIn (Ether) that needs to be approved to the wallet before the transaction in wei |
+| `gas`           | Flag that indicates whether to calculate and return the price impact of the transaction                               |
+| `amountOut`     | (Optional, default value is 1 for Mainnet) The chainId of the network                                                 |
+| `priceImpact`   | (Optional, default value is 300 for 3%) Slippage in basis points                                                      |
+| `createdAt`     | Block number the transaction was created on                                                                           |
+| `tx`            | The tx object to use in ethers. Contains sub-parameters: <br/> -`data`<br/> -`to` <br/>-`from` <br/>-`value`          |

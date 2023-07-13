@@ -2,7 +2,7 @@
   "index": "Welcome",
   "introduction": "Introduction",
   "get-started": "Get-Started",
-  "execution-api": "Execution API",
+  "router-api": "Router API",
   "metadata-api": "Metadata API",
   "how-to": "How-to Guides",
   "swagger": {
