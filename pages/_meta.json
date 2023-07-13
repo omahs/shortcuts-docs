@@ -17,9 +17,5 @@
     "type": "page",
     "href": "https://t.me/enso_api",
     "newWindow": true
-  },
-  "about": {
-    "title": "About",
-    "type": "page"
   }
 }
