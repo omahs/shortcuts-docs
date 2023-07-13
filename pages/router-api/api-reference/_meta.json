@@ -1,5 +1,5 @@
 {
-  "overview": "test",
+  "overview": "Overview",
   "route": "GET /v1/shortcuts/route",
   "bundle": "POST /v1/shortcuts/bundle"
 }
