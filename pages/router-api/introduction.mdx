@@ -1,6 +1,8 @@
+import { Callout } from 'nextra/components'
+
 ## What is the Router API?
 
-The Route API is a highly-efficient DeFi aggregation and smart order routing REST API over HTTP. With it, developers can easily tap into optimized routes for DeFi positions and token swaps across various chains.
+The Route API is a highly-efficient DeFi aggregation and smart order routing REST API. With it, developers can easily tap into optimized routes for DeFi positions and multi-token swaps across various chains.
 
 With a single API integration, unlock a host of DeFi strategies in your application. The Route API finds the optimal execution path across a multitude of DeFi protocols such as liquidity pools, lending platforms, automated market makers, yield optimizers, and more.
 
@@ -8,25 +10,47 @@ This allows for maximized capital efficiency and yield optimization, taking into
 
 ---
 
-Try it out:
+<Callout type="info" emoji="💡">
+  Try it out:
+</Callout>
 
-Let's say you want to go from Ether to a the steCrv Curve pool. Also, you want to deposit the Curve LP into the Curve Gauge.
-In the route endpoint you would simply pass a tokenIn (Ether), the amount and the tokenOut (the Curve Gauge).
-
-Enso will take care to swap your token in to the required token (if needed), deposit the LP into the Curve Gauge and stake the LP tokens into the Curve Gauge.
+👉 Run this curl request to see a live route response for entering a Curve position with ETH.
 
 ```bash copy
-curl --request GET \
-     --url 'https://api.enso.finance/api/v1/shortcuts/route?chainId=1&tokenInAmountToApprove=0&tokenInAmountToTransfer=&priceImpact=true&toEoa=true&amountIn=1000000000000000000&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&tokenOut=0x182b723a58739a9c974cfdb385ceadb237453c28' \
-     --header 'accept: application/json'
+curl -X 'GET' \
+  'https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&priceImpact=true&toEoa=true&amountIn=1000000000000000000&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&tokenOut=0x6c3f90f043a72fa612cbac8115ee7e52bde6e490' \
+  -H 'accept: application/json'
 ```
 
-It will return:
+👉 Or try it out in the [Swagger UI](https://api.enso.finance/api#/shortcuts/RouterController_routeShortcutTransaction)
 
-## Why to use?
+Will return a response like this:
 
-## How does it work?
+```json
+{
+  "createdAt": 17692827,
+
+  "gas": 625417,
+  "amountOut": "1949890251706461962125",
+  "tx": {
+    "to": "0x7fEA6786D291A87fC4C98aFCCc5A5d3cFC36bc7b",
+    "from": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+    "value": "1000000000000000000",
+    "data": "0xffa2ca3b273...."
+  ...
+  }}
 
 ```
 
-```
+The response will contain a valid transaction that you can broadcast to the network and a simulation of the transaction itself.
+
+#### What's happening?
+
+Let's say you want to go from ETH to a Curve pool. Also, to get additional yield, you want to deposit the LP token into a Curve Gauge.
+In the route endpoint, like in the above example, you would pass a tokenIn (ETH), the amount and the tokenOut, for example the tricrypto Curve Gauge.
+
+Under the hood, Enso will take care of the following steps:
+
+1. Swap Ether for one of the triCrypto underlying, in this case, USDC
+2. Deposit USDC into the [triCrypto](https://etherscan.io/address/0xbebc44782c7db0a1a60cb6fe97d0b483032ff1c7) Curve pool, receiving [triCrypto LP tokens](https://etherscan.io/address/0x6c3f90f043a72fa612cbac8115ee7e52bde6e490)
+3. Stake the received LP token into the [Curve Gauge](https://etherscan.io/address/0xbfcf63294ad7105dea65aa58f8ae5be2d9d0952a)

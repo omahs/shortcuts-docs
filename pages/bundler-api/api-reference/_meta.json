@@ -1,0 +1,4 @@
+{
+  "overview": "Overview",
+  "bundle": "POST /v1/shortcuts/bundle"
+}

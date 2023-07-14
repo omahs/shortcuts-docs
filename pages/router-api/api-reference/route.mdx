@@ -22,7 +22,7 @@ This simulation gives you a comprehensive quote, detailing expected gas costs, r
 | `chainId`                 | (Optional) The chainId of the network. Default value is 1 for Mainnet                                                            | chainId=1                              |
 | `slippage`                | (Optional) Slippage in basis points. Default value is 300 for 3%                                                                 | slippage=100 (1%)                      |
 | `tokenInAmountToApprove`  | (Optional) If entering with EOA, Amount of tokenIn (ERC20) that needs to be approved to the wallet before the transaction in wei | tokenInAmountToApprove= 100000000000   |
-| `tokenInAmountToTransfer` | (Optional) If entering with EOA, Amount of tokenIn (Ether) that needs to be approved to the wallet before the transaction in wei | tokenInAmountToTransfer = 100000000000 |
+| `tokenInAmountToTransfer` | (Optional) If entering with EOA, Amount of tokenIn (Ether) that needs to be transfer to the wallet before the transaction in wei | tokenInAmountToTransfer = 100000000000 |
 
 ### Response
 
@@ -32,7 +32,6 @@ The tx objects gives you the transaction to use in ethers. The other fields are 
 | Query Param   | Description                                                                                                                                |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `route`       | An Array of objects containig: <br/> `tokenIn` <br/> `positionInId` <br/> `tokenOut` <br/> `positionOutId` <br/> `protocol` <br/> `action` |
-| `tokenIn`     | Ethereum address of the token to swap or enter into a position from                                                                        |
 | `gas`         | Estimated gas used by the transaction                                                                                                      |
 | `amountOut`   | Estimated amount out received                                                                                                              |
 | `priceImpact` | Price impact in basis points, null if USD price not found                                                                                  |
@@ -83,7 +82,3 @@ https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0xd8da6bf2
   }
 }
 ```
-
-#### Approval flow to spend ERC20 tokens from an EoA
-
-#### Multi-tokens swap
