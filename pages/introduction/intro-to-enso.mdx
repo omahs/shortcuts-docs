@@ -46,10 +46,12 @@ All interactions that are done from an EOA account will result in the correspond
 <center><Image src={eoa_img} alt="Key" width={500} height={500} /></center>
 
 
+
 ### Contract Account(Smart Wallet) Interactions
 
 Applications that enable Smart Wallets to interact with their platform can utilize Enso for all [Tokenized Interactions](../background/tokenizedVsNonTokenized/tokenized.mdx) and [Non-Tokenized Interactions](../background/tokenizedVsNonTokenized/nonTokenized.mdx).
 
+All interactions that are done from a Contract Account will result in the corresponding tokens and state being stored inside of the Contract Account.  For example, if a user borrows on Aave, and then leverages the borrowed tokens then the borrowed tokens, leveraged state will be stored and associated to the Contract Account.
 
 <center><Image src={smart_img} alt="Key" width={500} height={500} /></center>
 
