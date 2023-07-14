@@ -1,6 +1,7 @@
 {
     "actions": "Actions",
-    "networks": "Networks",
     "tokens": "Tokens",
-    "tokenizedVsNonTokenized": "Tokenized Vs Non Tokenized"
+    "tokenizedVsNonTokenized": "Tokenized Vs Non Tokenized",
+    "networks": "Networks",
+    "": "Networks"
 }
