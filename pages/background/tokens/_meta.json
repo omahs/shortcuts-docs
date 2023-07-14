@@ -1,5 +1,4 @@
 {
-    "nativeTokens": "Native Tokens",
-    "basicTokens": "Basic Tokens",
+    "baseTokens": "Base Tokens",
     "defiTokens": "DeFi Tokens"
 }
