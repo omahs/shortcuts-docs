@@ -1,5 +1,8 @@
 import Image from "next/image";
 import overview_img from "../../assets/overview.png";
+import eoa_img from "../../assets/eoa.png";
+import smart_img from "../../assets/smartWallet.png";
+
 
 # Introduction to Enso
 
@@ -36,13 +39,37 @@ An example of a actions being bundled together can be viewed in the [actions](..
 
 ### Externally Owned Account(EOA) Interactions
 
-Applications that enable EOAs to interact with their platform can utilize Enso for all [tokenfull actions](../)
+Applications that enable EOAs to interact with their platform can utilize Enso for all [Tokenized Interactions](../background/tokenizedVsNonTokenized/tokenized.mdx).
+
+All interactions that are done from an EOA account will result in the corresponding tokens being sent to the EOA account.  For example, if a user swaps 10 tokens, the 10 tokens will be sent to the EOA account.
+
+<center><Image src={eoa_img} alt="Key" width={500} height={500} /></center>
 
 
 
+### Contract Account(Smart Wallet) Interactions
 
-### Smart Wallet Interactions
+Applications that enable Smart Wallets to interact with their platform can utilize Enso for all [Tokenized Interactions](../background/tokenizedVsNonTokenized/tokenized.mdx) and [Non-Tokenized Interactions](../background/tokenizedVsNonTokenized/nonTokenized.mdx).
+
+All interactions that are done from a Contract Account will result in the corresponding tokens and state being stored inside of the Contract Account.  For example, if a user borrows on Aave, and then leverages the borrowed tokens then the borrowed tokens, leveraged state will be stored and associated to the Contract Account.
+
+<center><Image src={smart_img} alt="Key" width={500} height={500} /></center>
+
+
+## Who can use Enso?
+
+All of these network participants can leverage Enso not only for execution, but also for fetching all relevant metadata of DeFi protocols.
+
+1. **Single Chain Routers**: Enable best route execution into base tokens and exotic tokens with native transaction batching.  
+2. **Cross-chain Routers**: Enabling users to execute a bundle of actions on one chain, and then bridge to another chain and excute another bundle.
+3. **Wallets**: Show DeFi protocols, and enable execution into hundreds of DeFi protocols with a wide variety of primitives available with best route execution.
+4. **Dashboards**:  Enable better execution of routes, and provide a better user experience for users through native transaction batching of DeFi interactions
+5. **Aggregators**:  Enable best route execution into base tokens and exotic tokens.
+6. **Yield Farming Funds**: Rely upon Enso for providing you all the metadata and execution paths you need to make the best decisions for your fund.
+7. **DeFi protocols**: Offer one-click deposits from any token into your protocol natively on your own interface to increase your TVL.
+8. **Account Abstraction SDKs**: Natively bake within your SDK the ability to not only create Smart Wallets compatible with ERC4337 but also enable Enso API to supercharge your SDK users for building the next generation of DeFi applications.
+9. **Strategy Platforms**: Enso is a highly flexible and versitle framework that allows you to create custom DeFi strategies where you can create your own custom workflows, and built your own interface and full product ontop of Enso.
 
 
 
-## What can I build on Enso?
+Ready to get started? Check out our [Quick Start](../TODOADD.mdx) guide to start building with Enso today!
