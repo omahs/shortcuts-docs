@@ -1,6 +1,6 @@
 {
-    "actions": "Actions",
-    "networks": "Networks",
+    "protocols": "Protocols",
     "tokens": "Tokens",
-    "tokenizedVsNonTokenized": "Tokenized Vs Non Tokenized"
+    "tokenizedVsNonTokenized": "Tokenized Vs Non Tokenized",
+    "networks": "Networks"
 }
