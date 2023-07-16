@@ -4,6 +4,7 @@
   "router-api": "Router API",
   "bundler-api": "Bundler API",
   "metadata-api": "Metadata API",
+  "react-hooks": "React Hook Library",
   "background": "Background",
   "developer-resources": "Developer Resources",
   "dashboard": {
