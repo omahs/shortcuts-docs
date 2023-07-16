@@ -12,7 +12,7 @@ All interactions that are done from an EOA account will result in the correspond
 
 # Example
 
-In this example, we will have a user that has 5 WETH in their wallet, and wants to:
+In this example, we will have a user that has [5 WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) in their Ethereum mainnet wallet, and wants to:
     1. Deposit 1 WETH into [Yearn for yvWETH](https://etherscan.io/token/0xa258C4606Ca8206D8aA700cE2143D7db854D168c)
     2. Deposit 1 WETH into [Aave for aWETH](https://etherscan.io/token/0x030bA81f1c18d280636F32af80b9AAd02Cf0854e)
     3. Deposit into 1 WETH into [Balancer B-80BAL-20WETH pool](https://etherscan.io/token/0x5c6ee304399dbdb9c8ef030ab642b10820db8f56)
@@ -24,9 +24,9 @@ In this example, we will have a user that has 5 WETH in their wallet, and wants 
 The user must approve the WETH first on the contract so that the contract can execute the bundle of transactions.
 
 ### Approve: Fetch address
-Each user has their own respective routing contract which will be deployed, and executed in the same transaction when the execution transaction is submitted.  This reduced the risks of approvals with a single-point of failure contract, and the user that is submitting the transaction is the owner of that contract not Enso, further reducing the risk of a malicious actors.
+Each user has their own respective routing contract which will be deployed, and executed in the same transaction when the execution transaction is submitted.  This reduces the risks of approvals with a single-point of failure contract, and the user that is submitting the transaction is the owner of that contract not Enso, further reducing the risk.
 
-```
+```bash copy
 curl -X 'GET' \
   'https://api.enso.finance/api/v1/wallet?chainId=1 \
   fromAddress=0x57757E3D981446D585Af0D9Ae4d7DF6D64647806' \
@@ -47,13 +47,87 @@ You will be returned with:
 }
 ```
 
+If the user has already used Enso through another integrator, then `isDeployed` will be true.  
 
-### Approve: Execute Approval
 
+### Approve: Approve Transaction
 
+Ethers:
+```javascript
+await ERC20(0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2).approve(address, 5 Ether) // take decimals of the token you're approving into account
+```
+
+Wagmi
+```javascript
+
+```
 
 ## Step 2: Execute
 
+### Execute: Build actions
+
+We are using the [Route action](../../bundler-api/actions/route) inside of the [Bundle endpoint](../../bundler-api/api-reference/overview) as this action compares the best execution route for token amount out, and gas execution price.  For example, it might be better to purchase yvWETH on a secondary exchange than directly depositing it depending upon the exchange rate of that token on the secondary market.
+
+ WETH to yvWETH on Yearn
+ WETH to aWETH on Aave
+ WETH to B-80BAL-20WETH on Balancer
+ WETH to Aura-wstETH-ETH on Beefy
+ WETH to DAI Swap
 
 
-### Example
+
+```bash copy
+curl -X POST 'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0x57757E3D981446D585Af0D9Ae4d7DF6D64647806' \
+-H 'Content-Type: application/json' \
+-d '[
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "tokenOut": "0xa258C4606Ca8206D8aA700cE2143D7db854D168c",
+      "amountIn": "1000000000000000000"
+    }
+  },
+  
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "tokenOut": "0x030bA81f1c18d280636F32af80b9AAd02Cf0854e",
+      "amountIn": "1000000000000000000"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "tokenOut": "0x5c6ee304399dbdb9c8ef030ab642b10820db8f56",
+      "amountIn": "1000000000000000000"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "tokenOut": "0xe0d5f9da3613c047003b77caa31270abe3eda6b0",
+      "amountIn": "1000000000000000000"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "tokenOut": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "amountIn": "1000000000000000000"
+    }
+  }
+]'
+```
+
+
+### 
