@@ -1,0 +1,106 @@
+## `GET /v1/opportunities/{address}`
+
+Returns Yield opportunities for a wallet.
+Based on the wallet content, it will return a list of opportunities.
+
+### Request
+
+#### Query Parameters:
+
+| Query Param | Description                                    | Example                    |
+| ----------- | ---------------------------------------------- | -------------------------- |
+| `address`   | Address of the wallet to get opportunities for | address=0x6b175474e8909... |
+
+It will return a list of action that can be used with the [bundle endpoint](/bundler-api)
+
+#### Response:
+
+```json
+[
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "tokenOut": "0x1f44e67eb4b8438efe62847affb5b8e528e3f465",
+      "amount": "1000000000000000000",
+      "slippage": "300"
+    }
+  }
+],
+[
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "tokenOut": "0x1f44e67eb4b8438efe62847affb5b8e528e3f465",
+      "amount": "1000000000000000000",
+      "slippage": "300"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "tokenOut": "0x055475920a8c93cffb64d039a8205f7acc7722d3",
+      "amount": "1000000000000000000",
+      "slippage": "300"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "tokenOut": "0x7f517657496c09c43cc28d0ca131e35dcd557e02",
+      "amount": "1000000000000000000",
+      "slippage": "300"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "tokenOut": "0xc5578194d457dcce3f272538d1ad52c68d1ce849",
+      "amount": "1000000000000000000",
+      "slippage": "300"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "tokenOut": "0x34d7d7aaf50ad4944b70b320acb24c95fa2def7c",
+      "amount": "1000000000000000000",
+      "slippage": "300"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "tokenOut": "0xaaf5110db6e744ff70fb339de037b990a20bdace",
+      "amount": "1000000000000000000",
+      "slippage": "300"
+    }
+  },
+  ....
+  ]
+```
+
+#### Example
+
+Get Yield opportunities for vitalik.eth wallet address
+
+```bash
+curl -X 'GET' \
+  'https://api.enso.finance/api/v1/opportunities/0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' \
+  -H 'accept: application/json'
+```
+
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/OpportunitiesController_opportunitiesForAddress)

@@ -1,0 +1,119 @@
+## GET /v1/standards
+
+Get all the Enso supported protocols to use in the bundle endpoint
+
+#### Response:
+
+```json
+[
+  {
+    "protocol": {
+      "slug": "0x",
+      "url": "https://0x.org/"
+    },
+    "forks": [],
+    "methods": [
+      {
+        "method": "apiswap",
+        "name": "ZeroEx_Swap",
+        "functionNames": [
+          "extractElement",
+          "bytes32ToUint256"
+        ],
+        "supportedChains": [
+          {
+            "id": 1,
+            "name": "Ethereum"
+          },
+          {
+            "id": 10,
+            "name": "Optimism"
+          },
+          {
+            "id": 137,
+            "name": "Polygon"
+          },
+          {
+            "id": 42161,
+            "name": "Arbitrum One"
+          },
+          {
+            "id": 43114,
+            "name": "Avalanche"
+          },
+          {
+            "id": 56,
+            "name": "BNB Chain"
+          }
+        ],
+        "inputs": {
+          "tokenIn": "Address of token to sell",
+          "tokenOut": "Address of token to buy",
+          "amountIn": "Raw amount to sell",
+          "slippage": "Amount of slippage"
+        }
+      }
+    ]
+  },
+  {
+    "protocol": {
+      "slug": "1inch",
+      "url": "https://1inch.io/"
+    },
+    "forks": [],
+    "methods": [
+      {
+        "method": "apiswap",
+        "name": "OneInch_Swap",
+        "functionNames": [
+          "extractElement",
+          "bytes32ToUint256"
+        ],
+        "supportedChains": [
+          {
+            "id": 1,
+            "name": "Ethereum"
+          },
+          {
+            "id": 10,
+            "name": "Optimism"
+          },
+          {
+            "id": 137,
+            "name": "Polygon"
+          },
+          {
+            "id": 42161,
+            "name": "Arbitrum One"
+          },
+          {
+            "id": 43114,
+            "name": "Avalanche"
+          },
+          {
+            "id": 56,
+            "name": "BNB Chain"
+          }
+        ],
+        "inputs": {
+          "tokenIn": "Address of token to sell",
+          "tokenOut": "Address of token to buy",
+          "amountIn": "Raw amount to sell",
+          "slippage": "Amount of slippage"
+        }
+      }
+    ]
+  },
+  ....
+]
+```
+
+Example
+
+```bash
+curl -X 'GET' \
+  'https://api.enso.finance/api/v1/standards' \
+  -H 'accept: */*'
+```
+
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/StandardsController_standards)

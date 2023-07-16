@@ -1,17 +1,15 @@
 ## Endpoints
 
-Learn more about the different endpoints of Swap API:
+Learn more about the different endpoints of the Metadata API:
 
-    - GET /v1/opportunities/tokenIn/ -
-    - GET /v1/opportunities/-
-    - GET /v1/tokens
-    - GET /v1/positions
-    - GET /v1/actions
-    - GET /v1/standards
-    - GET /v1/wallet
+Yield opportunities:
 
-## Authentication
+- `GET /v1/opportunities/tokenIn/{tokenAddress}`: returns yield opportunities for a given token
+- `GET /v1/opportunities/{address}`: returns yield opportunities a given wallet address
 
-Enso authenticates your API requests using your account’s API keys. Once you’re set up, ensure that you specify your key with the 0x-api-key header parameter in your requests.
+Enso:
 
-You can create, access or revoke your API keys via the Enso portal.
+- `GET /v1/tokens`: returns all of the tokens supported by the api
+- `GET /v1/actions`: returns all of the actions supported by the api, used to get the data needed to use the bundle api
+- `GET /v1/standards`: returns all of the protocols supported by the api
+- `GET /v1/wallet`: return enso wallet details

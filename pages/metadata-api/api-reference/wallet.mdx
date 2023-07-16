@@ -1,0 +1,33 @@
+## GET /v1/wallet
+
+For a given EoA, it returns the Enso Smart Wallet Address details
+
+### Request
+
+#### Query Parameters:
+
+| Query Param | Description                                      | Example                    |
+| ----------- | ------------------------------------------------ | -------------------------- |
+| `address`   | Address of the EoA to get wallet for             | address=0x6b175474e8909... |
+| `chainId`   | (Optional, default to 1) Chain ID of the network | chainId=1                  |
+
+It will return a list of action that can be used with the [bundle endpoint](/bundler-api)
+
+#### Response:
+
+```json
+{
+  "address": "0x89ba58Cc0e8bcbC1108dbD6F33356a136a021C62", // Enso Smart Wallet Address
+  "isDeployed": false // Whether the wallet is deployed or not
+}
+```
+
+#### Example:
+
+```bash
+curl -X 'GET' \
+  'https://api.enso.finance/api/v1/wallet?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045' \
+  -H 'accept: application/json'
+```
+
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/WalletController_wallet)

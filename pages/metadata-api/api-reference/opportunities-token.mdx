@@ -1,0 +1,108 @@
+## `GET /v1/opportunities/tokenIn/{tokenAddress}`
+
+Returns Yield opportunities for a given token.
+Opportunities might differ based on the amountIn and slippage parameters.
+
+### Request
+
+#### Query Parameters:
+
+| Query Param    | Description                                                    | Example                    |
+| -------------- | -------------------------------------------------------------- | -------------------------- |
+| `tokenAddress` | EAddress of the token to get opportunities for                 | tokenIn=0x6b175474e8909... |
+| `amountIn`     | (Optional) Amount of token to use in recommended opportunities | amountIn=100000000000000   |
+| `slippage`     | (Optional) Slippage in basis points (1% = 1000)                | slippage= 300              |
+
+It will return a list of actions that can be used with the [bundle endpoint](/bundler-api)
+
+#### Response:
+
+```json
+[
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "tokenOut": "0x1f44e67eb4b8438efe62847affb5b8e528e3f465",
+      "amount": "1000000000000000000",
+      "slippage": "300"
+    }
+  }
+],
+[
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "tokenOut": "0x1f44e67eb4b8438efe62847affb5b8e528e3f465",
+      "amount": "1000000000000000000",
+      "slippage": "300"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "tokenOut": "0x055475920a8c93cffb64d039a8205f7acc7722d3",
+      "amount": "1000000000000000000",
+      "slippage": "300"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "tokenOut": "0x7f517657496c09c43cc28d0ca131e35dcd557e02",
+      "amount": "1000000000000000000",
+      "slippage": "300"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "tokenOut": "0xc5578194d457dcce3f272538d1ad52c68d1ce849",
+      "amount": "1000000000000000000",
+      "slippage": "300"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "tokenOut": "0x34d7d7aaf50ad4944b70b320acb24c95fa2def7c",
+      "amount": "1000000000000000000",
+      "slippage": "300"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "tokenOut": "0xaaf5110db6e744ff70fb339de037b990a20bdace",
+      "amount": "1000000000000000000",
+      "slippage": "300"
+    }
+  },
+  ....
+  ]
+```
+
+#### Example
+
+Get Yield opportunities for DAI
+
+```bash
+curl -X 'GET' \
+  'https://api.enso.finance/api/v1/opportunities/tokenIn/0x6b175474e89094c44da98b954eedeac495271d0f?amountIn=1000000000000000000&slippage=300' \
+  -H 'accept: */*'
+```
+
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/OpportunitiesController_opportunitiesForToken)
