@@ -1,2 +1,38 @@
+import Image from "next/image";
+import smart_img from "../../../assets/smartWallet.png";
+
+
 # Contract Account(Smart Wallet)
 
+Applications that enable Smart Wallets to interact with their platform or are an application leveraging Smart Wallets can utilize Enso for all [Tokenized Interactions](../background/tokenizedVsNonTokenized/tokenized.mdx) and [Non-Tokenized Interactions](../background/tokenizedVsNonTokenized/nonTokenized.mdx).
+
+All interactions that are done from a Contract Account will result in the corresponding tokens and state being stored inside of the Contract Account.  For example, if a user borrows on Aave, and then leverages the borrowed tokens then the borrowed tokens, leveraged state will be stored and associated to the Contract Account.
+
+<center><Image src={smart_img} alt="Key" width={500} height={500} /></center>
+
+
+
+## Smart Wallets Supported
+
+### Enso Smart Wallet
+Enso has created a minimal Smart Wallet with bundling technnology unrivaled compared to Multicall and Multisend.    
+
+
+### Gnosis Safe
+
+The Gnosis Safe implementation can be on their [github](https://github.com/safe-global/safe-contracts). 
+
+
+### Biconomy
+
+The Biconomy implementation can be seen on their [github](https://github.com/bcnmy/scw-contracts).  To enable Enso actions throughout your application that leverages Biconomy contracts, you can use the exact same endpoints as gnosis safe as biconomy contracts are a fork of gnosis safe.
+
+
+### Ambire Wallet
+
+Coming soon...
+
+
+### Etherspot
+
+Coming soon...
