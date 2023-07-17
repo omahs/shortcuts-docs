@@ -1,0 +1,80 @@
+import { Callout } from 'nextra/components'
+
+# Enter 1 position from 1 token
+
+In this example, we will have a user that has [1 WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) in their Ethereum mainnet wallet, and wants to:
+    4. Deposit 1 WETH into [Beefy Aura wstETH-ETH](https://etherscan.io/address/0xe0d5f9da3613c047003b77caa31270abe3eda6b0)
+
+
+<Callout type="info" emoji="💡">
+  Beefy Aura wstETH-ETH token is multihopping over 4 DeFi protocols
+</Callout>
+
+
+## Step 1: Approve
+The user must approve the WETH first on the contract so that the contract can execute the bundle of transactions.
+
+### Approve: Fetch address
+Each user has their own respective routing contract which will be deployed, and executed in the same transaction when the execution transaction is submitted.  This reduces the risks of approvals with a single-point of failure contract, and the user that is submitting the transaction is the owner of that contract not Enso, further reducing the risk.
+
+```bash copy
+curl -X 'GET' \
+  'https://api.enso.finance/api/v1/wallet?chainId=1 \
+  &fromAddress=0x57757E3D981446D585Af0D9Ae4d7DF6D64647806' \
+  -H 'accept: application/json'
+  --header 'Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation'
+```
+
+```javascript
+chainid: "Chain ID to execute the approval on", // 1 = Ethereum Mainnet, [full networks](../networks)
+fromAddress: "EOA address that is executing the approval", // 0x57757E3D981446D585Af0D9Ae4d7DF6D64647806
+```
+
+You will be returned with:
+
+```json
+{
+  "address": "0xD6A4217CF6A3587B4E33e9a59C52BF57469e713a", // Individual contract owned by the EOA
+  "isDeployed": false
+}
+```
+
+If the user has already used Enso through another integrator, then `isDeployed` will be true.  
+
+
+### Approve: Approve Transaction
+
+Enso:
+```bash copy
+curl -X 'GET' \
+  'https://api.enso.finance/api/v1/wallet/approve?chainId=1& \
+  fromAddress=0x57757E3D981446D585Af0D9Ae4d7DF6D64647806& \
+  tokenAddress=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2& \
+  amount=1000000000000000000000000000' \
+  -H 'accept: application/json'
+  --header 'Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation'
+```
+
+Ethers:
+```javascript
+await ERC20(0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2).approve(address, 5 Ether) // take decimals of the token you're approving into account
+```
+
+## Step 2: Execute
+
+### Execute: Build actions
+
+We are using the [Route action](../../bundler-api/actions/route) inside of the [Bundle endpoint](../../bundler-api/api-reference/overview) as this action compares the best execution route for token amount out, and gas execution price.  For example, it might be better to purchase yvWETH on a secondary exchange than directly depositing it depending upon the exchange rate of that token on the secondary market.
+
+
+```bash copy
+curl -X POST 'https://api.enso.finance/api/v1/shortcuts/route?chainId=1& \
+fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&priceImpact=false& \
+toEoa=true&amountIn=1000000000000000000 \
+&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee \
+&tokenOut=0xae7ab96520de3a18e5e111b5eaab095312d7fe84' \
+-H 'Content-Type: application/json' \
+--header 'Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation'
+```
+
+The `data` value contains the bundle calldata to be submitted to the user.

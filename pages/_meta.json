@@ -1,6 +1,7 @@
 {
   "index": "Welcome",
   "introduction": "Introduction",
+  "examples": "Examples",
   "router-api": "Router API",
   "bundler-api": "Bundler API",
   "metadata-api": "Metadata API",
