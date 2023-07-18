@@ -2,66 +2,39 @@ import { Callout } from 'nextra/components'
 
 # Enter multiple positions from 1 token
 
-In this example, we will have a user that has [3 WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) in their Ethereum mainnet wallet, and wants to:
-
-- 1. Deposit 1 WETH into [Yearn for yvWETH](https://etherscan.io/token/0xa258C4606Ca8206D8aA700cE2143D7db854D168c)
-- 2. Deposit 1 WETH into [Balancer B-80BAL-20WETH pool](https://etherscan.io/token/0x5c6ee304399dbdb9c8ef030ab642b10820db8f56)
-- 3. Deposit 1 WETH into [Beefy Aura wstETH-ETH](https://etherscan.io/address/0xe0d5f9da3613c047003b77caa31270abe3eda6b0)
+In this example, we have a smart wallet (e.g. Gnosis Safe, Enso Smart Wallet) that is holding [[3 WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) and wants to:
 
 <Callout type="info" emoji="💡">
   Each of these action counts multiple hops
 </Callout>
 
-## Step 1: Approve
+- 1. Deposit 1 WETH into [Yearn for yvWETH](https://etherscan.io/token/0xa258C4606Ca8206D8aA700cE2143D7db854D168c)
+- 2. Deposit 1 WETH into [Balancer B-80BAL-20WETH pool](https://etherscan.io/token/0x5c6ee304399dbdb9c8ef030ab642b10820db8f56)
+- 3. Deposit 1 WETH into [Beefy Aura wstETH-ETH](https://etherscan.io/address/0xe0d5f9da3613c047003b77caa31270abe3eda6b0)
 
-The user must approve the WETH first on the contract so that the contract can execute the bundle of transactions.
+### Set Smart-wallet address
 
-### Approve: Fetch address
+<Callout type="info" emoji="💡">
+  If you know your smart wallet address, you can skip this step.
+</Callout>
 
-Each user has their own respective routing contract which will be deployed, and executed in the same transaction when the execution transaction is submitted. This reduces the risks of approvals with a single-point of failure contract, and the user that is submitting the transaction is the owner of that contract not Enso, further reducing the risk.
+You will need to set the smart wallet address in the `fromAddress` field.
+If you are using an Enso Smart Wallet, and don't remember the address you can fetch using the metadata API (command below).
+If you know your address or you are using another smart wallet such as Safe, you can skip to the next step.
 
 ```bash copy
 curl -X 'GET' \
-  'https://api.enso.finance/api/v1/wallet?chainId=1 \
-  &fromAddress=0x57757E3D981446D585Af0D9Ae4d7DF6D64647806' \
+  'https://api.enso.finance/api/v1/wallet?chainId=1&fromAddress=<EOA_ADDRESS>' \
   -H 'accept: application/json'
-  --header 'Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation'
 ```
 
-```javascript
-chainid: "Chain ID to execute the approval on", // 1 = Ethereum Mainnet, [full networks](../networks)
-fromAddress: "EOA address that is executing the approval", // 0x57757E3D981446D585Af0D9Ae4d7DF6D64647806
-```
-
-You will be returned with:
+It returns the following:
 
 ```json
 {
-  "address": "0xD6A4217CF6A3587B4E33e9a59C52BF57469e713a", // Individual contract owned by the EOA
-  "isDeployed": false
+  "address": "0xD6A4217CF6A3587B4E33e9a59C52BF57469e713a", // Enso Smart Wallet Address
+  "isDeployed": true
 }
-```
-
-If the user has already used Enso through another integrator, then `isDeployed` will be true.
-
-### Approve: Approve Transaction
-
-Enso:
-
-```bash copy
-curl -X 'GET' \
-  'https://api.enso.finance/api/v1/wallet/approve?chainId=1& \
-  fromAddress=0x57757E3D981446D585Af0D9Ae4d7DF6D64647806& \
-  tokenAddress=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2& \
-  amount=3000000000000000000000000000' \
-  -H 'accept: application/json'
-  --header 'Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation'
-```
-
-Ethers:
-
-```javascript
-await ERC20(0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2).approve(address, 5 Ether) // take decimals of the token you're approving into account
 ```
 
 ## Step 2: Execute
@@ -71,7 +44,7 @@ await ERC20(0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2).approve(address, 5 Ether
 We are using the [Route action](../../bundler-api/actions/route) inside of the [Bundle endpoint](../../bundler-api/api-reference/overview) as this action compares the best execution route for token amount out, and gas execution price. For example, it might be better to purchase yvWETH on a secondary exchange than directly depositing it depending upon the exchange rate of that token on the secondary market.
 
 ```bash copy
-curl -X POST 'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0x57757E3D981446D585Af0D9Ae4d7DF6D64647806' \
+curl -X POST 'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0xD6A4217CF6A3587B4E33e9a59C52BF57469e713a' \
 -H 'Content-Type: application/json' \
 -d '[
   {
@@ -102,7 +75,6 @@ curl -X POST 'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAdd
     }
   }
 ]'
---header 'Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation'
 ```
 
 You will be returned:

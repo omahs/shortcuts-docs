@@ -2,20 +2,19 @@ import { Callout } from 'nextra/components'
 
 # Enter 1 position from 1 token
 
-In this example, we will have a user that has [1 WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) in their Ethereum mainnet wallet, and wants to:
-    4. Deposit 1 WETH into [Beefy Aura wstETH-ETH](https://etherscan.io/address/0xe0d5f9da3613c047003b77caa31270abe3eda6b0)
-
+In this example, we will have a user that has [1 WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) in their Ethereum mainnet wallet, and wants to deposit 1 WETH into [Beefy Aura wstETH-ETH](https://etherscan.io/address/0xe0d5f9da3613c047003b77caa31270abe3eda6b0)
 
 <Callout type="info" emoji="💡">
   Beefy Aura wstETH-ETH token is multihopping over 4 DeFi protocols
 </Callout>
 
-
 ## Step 1: Approve
+
 The user must approve the WETH first on the contract so that the contract can execute the bundle of transactions.
 
 ### Approve: Fetch address
-Each user has their own respective routing contract which will be deployed, and executed in the same transaction when the execution transaction is submitted.  This reduces the risks of approvals with a single-point of failure contract, and the user that is submitting the transaction is the owner of that contract not Enso, further reducing the risk.
+
+Each user has their own respective routing contract which will be deployed, and executed in the same transaction when the execution transaction is submitted. This reduces the risks of approvals with a single-point of failure contract, and the user that is submitting the transaction is the owner of that contract not Enso, further reducing the risk.
 
 ```bash copy
 curl -X 'GET' \
@@ -39,12 +38,12 @@ You will be returned with:
 }
 ```
 
-If the user has already used Enso through another integrator, then `isDeployed` will be true.  
-
+If the user has already used Enso through another integrator, then `isDeployed` will be true.
 
 ### Approve: Approve Transaction
 
 Enso:
+
 ```bash copy
 curl -X 'GET' \
   'https://api.enso.finance/api/v1/wallet/approve?chainId=1& \
@@ -56,6 +55,7 @@ curl -X 'GET' \
 ```
 
 Ethers:
+
 ```javascript
 await ERC20(0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2).approve(address, 5 Ether) // take decimals of the token you're approving into account
 ```
@@ -64,8 +64,7 @@ await ERC20(0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2).approve(address, 5 Ether
 
 ### Execute: Build actions
 
-We are using the [Route action](../../bundler-api/actions/route) inside of the [Bundle endpoint](../../bundler-api/api-reference/overview) as this action compares the best execution route for token amount out, and gas execution price.  For example, it might be better to purchase yvWETH on a secondary exchange than directly depositing it depending upon the exchange rate of that token on the secondary market.
-
+We are using the [Route action](../../bundler-api/actions/route) inside of the [Bundle endpoint](../../bundler-api/api-reference/overview) as this action compares the best execution route for token amount out, and gas execution price. For example, it might be better to purchase yvWETH on a secondary exchange than directly depositing it depending upon the exchange rate of that token on the secondary market.
 
 ```bash copy
 curl -X POST 'https://api.enso.finance/api/v1/shortcuts/route?chainId=1& \
