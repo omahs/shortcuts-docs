@@ -30,11 +30,11 @@ curl --request POST \
 ```
 
 ```javascript
-fromAddress: "Address to use funds from";
-tokenIn: "Address of token to send";
-tokenOut: "Address of token to receive";
-amountIn: "Raw amount to send";
-tokenInAmountToTransfer: "326880000000000000000";
+fromAddress: 'Address to use funds from'
+tokenIn: 'Address of token to send'
+tokenOut: 'Address of token to receive'
+amountIn: 'Raw amount to send'
+tokenInAmountToTransfer: '326880000000000000000'
 ```
 
 ## Endpoints
@@ -43,24 +43,28 @@ tokenInAmountToTransfer: "326880000000000000000";
 
 The bundle endpoint enables bundling of many actions into one transaction, and for the examples below we will simply do one action of deposit.
 
-Convert from [USDC](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) to [yvUSDC](https://etherscan.io/address/0xa354f35829ae975e850e23e9615b11da1b3dc4de) assuming the user has USDC in their wallet. 
+For example we can bundle the following operations in one single transaction:
+
+- Convert from BAL and WETH to a Balancer [BAL80WETH20](https://etherscan.io/address/0x5c6Ee304399DBdB9C8Ef030aB642B10820DB8F56)
+- Convert from ETH to the ETH/stEth Curve pool [steCrv](https://etherscan.io/address/0x06325440D014e39736583c165C2963BA99fAf14E)
 
 ```
-curl --request POST \
-     --url 'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0x7713974908Be4BEd47172370115e8b1219F4A5f0' \
-     --header 'content-type: application/json' \
-     --data '
-[
-  {
-    "action": "deposit",
-    "args": {
-      "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-      "tokenOut": "0xa354f35829ae975e850e23e9615b11da1b3dc4de",
-      "amountIn": "1000000000000000000",
-      "primaryAddress": "0xa354f35829ae975e850e23e9615b11da1b3dc4de"
-    },
-    "protocol": "yearn-finance"
-  }
-]
-'
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation" \
+  --data '[
+    {
+      "protocol": "enso",
+      "action": "route",
+      "args": {
+        "slippage": 300,
+        "tokenIn": ["0xba100000625a3754423978a60c9317c58a424e3D", "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"],
+        "tokenOut": "0x5c6Ee304399DBdB9C8Ef030aB642B10820DB8F56",
+        "amountIn": [1000000000, 1000000000],
+        "tokenInAmountToApprove": [1000000000, 1000000000],
+      }
+    }
+  ]' \
+  "https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0x7713974908Be4BEd47172370115e8b1219F4A5f0"
+
 ```

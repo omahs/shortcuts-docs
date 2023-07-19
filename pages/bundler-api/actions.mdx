@@ -10,13 +10,12 @@ Actions are standardized interactions related to contract calls, allowing for qu
 
 **Depositing** into a position is applicable to many protocols, and each protocol has different function signatures for example:
 
-
 ### Before
 
 > **balancer**: joinPool(bytes32 poolId, address sender, address recipient, (address[] assets, uint256[] maxAmountsIn, bytes userData, bool fromInternalBalance)  
 > **uniswap**: addLiquidity(address tokenA,address tokenB,uint amountADesired,uint amountBDesired,uint amountAMin,uint amountBMin,address to,uint deadline) external returns (uint amountA, uint amountB, uint liquidity)  
 > **beefy**: deposit(uint256)  
-> **morpho**: supply(address poolToken, address user, uint256 amount)   
+> **morpho**: supply(address poolToken, address user, uint256 amount)
 
 ### After
 
@@ -38,12 +37,12 @@ You can use the deposit action inside of the [bundle endpoint](../../api-referen
 ```
 
 ```javascript
-tokenIn: "Address of token to send" // You can define many tokens in by [inToken1, inToken2]
-?tokenOut: "Address of token to receive"; // Optional - protocols that have isolated contracts per each deposit(for example Yearn), then you do not need to define tokenOut.  For protocols that have a shared contract for all of their vaults/deposits such as balancer and univ4 then you should define tokenOut
-amountIn: "Raw amount to send"; // You can define mancy tokens out by [outToken1, outToken2]
-primaryAddress: "Address of smart contract to interact with"; // Address of smart contract to interact with
+tokenIn: 'Address of token to send' // You can define many tokens in by [inToken1, inToken2]
+  ? tokenOut
+  : 'Address of token to receive' // Optional - protocols that have isolated contracts per each deposit(for example Yearn), then you do not need to define tokenOut.  For protocols that have a shared contract for all of their vaults/deposits such as balancer and univ4 then you should define tokenOut
+amountIn: 'Raw amount to send' // You can define many tokens out by [outToken1, outToken2]
+primaryAddress: 'Address of smart contract to interact with' // Address of smart contract to interact with
 ```
-
 
 ## Endpoints
 
@@ -57,8 +56,8 @@ The actions endpoint returns all actions that are applicable to be used within t
 
 ```bash copy
 curl -X 'GET' \
+  -H "Content-Type: application/json" \
   'https://api.enso.finance/api/v1/actions' \
-   --header 'Api-Token: xxxx'
 ```
 
 You will receive a response that looks like this:

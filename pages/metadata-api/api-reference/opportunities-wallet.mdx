@@ -98,9 +98,9 @@ It will return a list of action that can be used with the [bundle endpoint](/bun
 Get Yield opportunities for vitalik.eth wallet address
 
 ```bash copy
-curl -X 'GET' \
-  'https://api.enso.finance/api/v1/opportunities/0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' \
-  -H 'accept: application/json'
+curl -X GET \
+  -H "Accept: application/json" \
+  "https://api.enso.finance/api/v1/opportunities/0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
 ```
 
 👉 Try it on [swagger](https://api.enso.finance/api#/metadata/OpportunitiesController_opportunitiesForAddress)

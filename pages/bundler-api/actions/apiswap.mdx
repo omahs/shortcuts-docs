@@ -1,3 +1,59 @@
-# API Swap
+# Deposit
 
-Available in endpoint.  Docs coming soon...
+Swap one Basic token to another. It gives the best router among multiple aggregators (0x, 1Inch..)
+
+1. For many cases you can directly use the [route endpoint](./route.md) to enter into a position or to get a token, rather than directly using the swap action. The route endpoint will determine best price and gas router for buying the position token on a secondary market.
+2. You need to have the token you want to swap from (tokenIn) in your wallet.
+
+## Example
+
+Using the swap action inside of the [bundle endpoint](../../api-reference/bundle).
+
+```
+{
+    protocol: "enso",
+    args: {
+        tokenIn: weth,
+        tokenOut: usdc,
+        amountIn: wethAmount
+        slippage: 300
+    },
+    action: "apiswap",
+},
+```
+
+```javascript
+tokenIn: 'Address of token to send' // You can define many tokens in by [inToken1, inToken2]
+tokenOut: 'Address of token to receive'
+amountIn: 'Raw amount to send'
+slippage: 'Slippage in basis points. Default value is 300 for 3%'
+```
+
+## Endpoints
+
+### GET
+
+### POST [/api/v1/shortcuts/bundle](https://api.enso.finance/api#/shortcuts/BundleController_bundleShortcutTransaction)
+
+The bundle endpoint enables bundling of many actions into one transaction, and for the examples below we will simply do one action of deposit.
+
+Convert from [WETH](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2) to [USDC](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) assuming the user has WETH in their wallet. More more efficiency it is advised to use the [route endpoint](./route.md) for these types of actions
+
+```
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation" \
+  --data '[
+  {
+    "action": "apiswap",
+    "args": {
+      "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "amountIn": "1000000000000000000",
+      "slippage": 300
+    },
+    "protocol": "enso"
+  }]' \
+  "https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0x7713974908Be4BEd47172370115e8b1219F4A5f0"
+
+```

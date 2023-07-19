@@ -18,8 +18,9 @@ This allows for maximized capital efficiency and yield optimization, taking into
 
 ```bash copy
 curl -X 'GET' \
-  'https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&priceImpact=true&toEoa=true&amountIn=1000000000000000000&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&tokenOut=0x6c3f90f043a72fa612cbac8115ee7e52bde6e490' \
-  -H 'accept: application/json'
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation" \
+  "https://api.enso.finance/api/v1/wallet?chainId=1&fromAddress=<SMART_WALLET>" \
 ```
 
 👉 Or try it out in the [Swagger UI](https://api.enso.finance/api#/shortcuts/RouterController_routeShortcutTransaction)

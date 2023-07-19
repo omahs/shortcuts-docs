@@ -24,8 +24,8 @@ If you know your address or you are using another smart wallet such as Safe, you
 
 ```bash copy
 curl -X 'GET' \
-  'https://api.enso.finance/api/v1/wallet?chainId=1&fromAddress=<EOA_ADDRESS>' \
-  -H 'accept: application/json'
+  -H "Accept: application/json" \
+  "https://api.enso.finance/api/v1/wallet?chainId=1&fromAddress=<EOA_ADDRESS>" \
 ```
 
 It returns the following:
@@ -44,9 +44,10 @@ It returns the following:
 We are using the [Route action](../../bundler-api/actions/route) inside of the [Bundle endpoint](../../bundler-api/api-reference/overview) as this action compares the best execution route for token amount out, and gas execution price. For example, it might be better to purchase yvWETH on a secondary exchange than directly depositing it depending upon the exchange rate of that token on the secondary market.
 
 ```bash copy
-curl -X POST 'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0xD6A4217CF6A3587B4E33e9a59C52BF57469e713a' \
--H 'Content-Type: application/json' \
--d '[
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation" \
+  --data '[
   {
     "protocol": "enso",
     "action": "route",
@@ -74,7 +75,9 @@ curl -X POST 'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAdd
       "amountIn": "1000000000000000000"
     }
   }
-]'
+]' \
+  "https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0xD6A4217CF6A3587B4E33e9a59C52BF57469e713a"
+
 ```
 
 You will be returned:

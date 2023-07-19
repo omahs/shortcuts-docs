@@ -11,13 +11,15 @@ In this example, we have a smart wallet (e.g. Gnosis Safe, Enso Smart Wallet) th
 ### Set Smart-wallet address
 
 You will need to set the smart wallet address in the `fromAddress` field.
-If you are using an Enso Smart Wallet, and don't remember the address you can fetch using the metadata API (command below).
+If you are using an Enso Smart Wallet, and don't remember the address you can fetch using the metadata API.
 If you know your address or you are using another smart wallet such as Safe, you can skip to the next step.
 
+Fetch Enso Smart Wallet address from an EoA:
+
 ```bash copy
-curl -X 'GET' \
-  'https://api.enso.finance/api/v1/wallet?chainId=1&fromAddress=<EOA_ADDRESS>' \
-  -H 'accept: application/json'
+curl -X GET \
+  -H "Accept: application/json" \
+  "https://api.enso.finance/api/v1/wallet?chainId=1&fromAddress=<EOA_ADDRESS>"
 ```
 
 It returns the following:
@@ -41,13 +43,10 @@ We are using the [Route action](../../bundler-api/actions/route) inside of the [
 Note that the we set `toEoA` to _false_, as we are using a smart wallet.
 
 ```bash copy
-curl -X POST 'https://api.enso.finance/api/v1/shortcuts/route?chainId=1& \
-fromAddress=0xD6A4217CF6A3587B4E33e9a59C52BF57469e713a&priceImpact=false& \
-toEoa=false&amountIn=1000000000000000000 \
-&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee \
-&tokenOut=0xae7ab96520de3a18e5e111b5eaab095312d7fe84' \
--H 'Content-Type: application/json' \
---header 'Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation'
+curl -X GET \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation" \
+  "https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0xD6A4217CF6A3587B4E33e9a59C52BF57469e713a&priceImpact=false&toEoa=false&amountIn=1000000000000000000&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&tokenOut=0xae7ab96520de3a18e5e111b5eaab095312d7fe84"
 ```
 
 The `data` value contains the bundle calldata to be submitted to the user.

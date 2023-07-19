@@ -60,8 +60,9 @@ The result will give a sanitized list of tokens that are supported by Enso, you 
 #### Example:
 
 ```bash copy
-curl -X 'GET' \
-  'https://api.enso.finance/api/v1/tokens'
+curl -X GET \
+  -H "Accept: application/json" \
+  "https://api.enso.finance/api/v1/tokens"
 ```
 
 👉 Try it on [swagger](https://api.enso.finance/api#/metadata/TokensController_findAll)

@@ -13,23 +13,23 @@ You can use the deposit action inside of the [bundle endpoint](../../api-referen
 
 ```
 {
-    protocol: "morpho",
+    protocol: "balancer-v2",
     args: {
         tokenIn: weth,
         tokenOut: b80bal20weth,
         amountIn: wethAmount
-        primaryAddress: morphoVault
+        primaryAddress: balancerVault
     },
     action: "deposit",
 },
 ```
 
 ```javascript
-tokenIn: "Address of token to send" // You can define many tokens in by [inToken1, inToken2]
+tokenIn: 'Address of token to send' // You can define many tokens in by [inToken1, inToken2]
+amountIn: 'Raw amount to send' // You can define many tokens out by [outToken1, outToken2]
   ? tokenOut
-  : "Address of token to receive"; // Optional - protocols that have isolated contracts per each deposit(for example Yearn), then you do not need to define tokenOut.  For protocols that have a shared contract for all of their vaults/deposits such as balancer and univ4 then you should define tokenOut
-amountIn: "Raw amount to send"; // You can define mancy tokens out by [outToken1, outToken2]
-primaryAddress: "Address of smart contract to interact with"; // Address of smart contract to interact with
+  : 'Address of token to receive' // Optional - protocols that have isolated contracts per each deposit(for example Yearn), then you do not need to define tokenOut.  For protocols that have a shared contract for all of their vaults/deposits such as balancer and univ4 then you should define tokenOut
+primaryAddress: 'Address of smart contract to interact with' //  Address of smart contract to interact with e.g. Balancer Vault
 ```
 
 ## Endpoints
@@ -42,24 +42,23 @@ Get all the protocols that have a deposit action
 
 The bundle endpoint enables bundling of many actions into one transaction, and for the examples below we will simply do one action of deposit.
 
-Convert from [USDC](0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) to [yvUSDC](0xa354f35829ae975e850e23e9615b11da1b3dc4de) assuming the user has USDC in their wallet. More more efficiency it is advised to use the [route endpoint](./route.md) for these types of actions
+Convert from [WETH](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) to [yvUSDC](https://etherscan.io/address/0x5c6Ee304399DBdB9C8Ef030aB642B10820DB8F56) assuming the user has USDC in their wallet. More more efficiency it is advised to use the [route endpoint](./route.md) for these types of actions
 
-```
-curl --request POST \
-     --url 'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0x7713974908Be4BEd47172370115e8b1219F4A5f0' \
-     --header 'content-type: application/json' \
-     --data '
-[
+```bash copy
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation" \
+  --data '[
   {
     "action": "deposit",
     "args": {
-      "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-      "tokenOut": "0xa354f35829ae975e850e23e9615b11da1b3dc4de",
+      "tokenIn": "0xba100000625a3754423978a60c9317c58a424e3d",
+      "tokenOut": "0x5c6Ee304399DBdB9C8Ef030aB642B10820DB8F56",
       "amountIn": "1000000000000000000",
-      "primaryAddress": "0xa354f35829ae975e850e23e9615b11da1b3dc4de"
+      "primaryAddress": "0xba12222222228d8ba445958a75a0704d566bf2c8",
+      "tokenInAmountToTransfer": "1000000000000000000"
     },
-    "protocol": "yearn-finance"
-  }
-]
-'
+    "protocol": "balancer-v2"
+  }]' \
+  "https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045"
 ```

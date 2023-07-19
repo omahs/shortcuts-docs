@@ -25,9 +25,9 @@ It will return a list of action that can be used with the [bundle endpoint](/bun
 #### Example:
 
 ```bash copy
-curl -X 'GET' \
-  'https://api.enso.finance/api/v1/wallet?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045' \
-  -H 'accept: application/json'
+curl -X GET \
+  -H "Accept: application/json" \
+  "https://api.enso.finance/api/v1/wallet?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045"
 ```
 
 👉 Try it on [swagger](https://api.enso.finance/api#/metadata/WalletController_wallet)
