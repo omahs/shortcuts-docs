@@ -2,7 +2,7 @@
 
 ## Summary
 
-Routing is the action for taking funds from the callers wallet, and converting it into a token, whether that is a [DeFi Position Token](../tokens/defiTokens.mdx), or a [Base Token](../tokens/baseTokens.mdx).
+Routing is the action for taking funds from the callers wallet, and converting it into a token, whether that is a [DeFi Position Token](../../concepts/tokens/defiTokens.mdx), or a [Base Token](../../concepts/tokens/baseTokens.mdx).
 
 This endpoint is a pathfinder for determine best price and gas execution across Enso dataset, DEX aggregators, and direct depositing into DeFi protocols.
 
@@ -12,8 +12,8 @@ With Enso you can simply use Route to obtain the DeFi position token resulting i
 
 You can use the route action:
 
-1. As an [individual call](https://api.enso.finance/api#/shortcuts/RouterController_routeShortcutTransaction)
-2. Or in a [bundle of calls](https://api.enso.finance/api#/shortcuts/BundleController_bundleShortcutTransaction)
+1. As an [individual call](../../router-api/introduction.mdx)
+2. Or in a [bundle of calls](../../bundler-api/introduction.mdx)
 
 ### Individual call
 
@@ -39,13 +39,11 @@ tokenInAmountToTransfer: "326880000000000000000";
 
 ## Endpoints
 
-### GET [4. protocols associated with deposit action]()
-
-### POST [/api/v1/shortcuts/bundle](https://api.enso.finance/api#/shortcuts/BundleController_bundleShortcutTransaction)
+### POST [/api/v1/shortcuts/bundle](../introduction.mdx)
 
 The bundle endpoint enables bundling of many actions into one transaction, and for the examples below we will simply do one action of deposit.
 
-Convert from [USDC](0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) to [yvUSDC](0xa354f35829ae975e850e23e9615b11da1b3dc4de) assuming the user has USDC in their wallet. More more efficiency it is advised to use the [route endpoint](./route.md) for these types of actions
+Convert from [USDC](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) to [yvUSDC](https://etherscan.io/address/0xa354f35829ae975e850e23e9615b11da1b3dc4de) assuming the user has USDC in their wallet. 
 
 ```
 curl --request POST \

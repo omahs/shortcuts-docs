@@ -1,10 +1,4 @@
 {
-    "status": {
-        "title": "Status ↗",
-        "type": "page",
-        "href": "https://status.enso.finance/",
-        "newWindow": true
-    },
     "swagger": {
         "title": "Swagger ↗",
         "type": "page",
@@ -22,6 +16,5 @@
         "type": "page",
         "href": "https://drive.google.com/file/d/1Z_szzLwwLqx9v6liyslKsos75I17obDS/view?usp=sharing",
         "newWindow": true
-    },
-    "faq": "FAQs"
+    }
 }
