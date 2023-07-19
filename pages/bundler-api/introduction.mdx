@@ -1,4 +1,6 @@
 import { Callout } from 'nextra/components'
+import Image from 'next/image'
+import gas from '../../assets/gas.png'
 
 ## What is the Bundle API?
 
@@ -14,7 +16,11 @@ The Bundle API takes care of optimizing the execution sequence and estimating th
 
 ## Gas Savings
 
-// TODO: Add gas savings table/image
+More transactions bundled together means more gas savings. The Bundle API is designed to optimize the execution sequence of the bundled actions, which can result in significant gas savings:
+
+<br></br>
+
+<Image src={gas} alt="Gas Chart" width={700} />
 
 ---
 
@@ -25,45 +31,37 @@ The Bundle API takes care of optimizing the execution sequence and estimating th
 👉 Run this curl request to see a live route response for entering a Curve Pool with ETH
 
 ```bash copy
-curl -X POST 'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=<your_chainId>&fromAddress=<your_fromAddress>' \
--H 'Content-Type: application/json' \
--d [
-  {
-    "protocol": "enso",
-    "action": "route",
-    "args": {
-      "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-      "tokenOut": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
-      "amountIn": "1000000000"
+curl -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation' \
+  -d '[
+    {
+      "protocol": "enso",
+      "action": "route",
+      "args": {
+        "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "tokenOut": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
+        "amountIn": "1000000000"
+      }
+    },
+    {
+      "protocol": "enso",
+      "action": "route",
+      "args": {
+        "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "tokenOut": "0x06325440d014e39736583c165c2963ba99faf14e",
+        "amountIn": "1000000000"
+      }
     }
-  },
-  {
-    "protocol": "enso",
-    "action": "route",
-    "args": {
-      "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-      "tokenOut": "0x06325440d014e39736583c165c2963ba99faf14e",
-      "amountIn": "1000000000"
-    }
-  }
-]
+  ]' \
+  'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+
 ```
 
 👉 Or try it out in the [Swagger UI](https://api.enso.finance/api#/shortcuts/BundleController_bundleShortcutTransaction)
-)
 
 Details:
 Let's say you want to go from Ether to a the steCrv Curve pool. Also, you want to deposit the Curve LP into the Curve Gauge.
 In the route endpoint you would simply pass a tokenIn (Ether), the amount and the tokenOut (the Curve Gauge).
 
 Enso will take care to swap your token in to the required token (if needed), deposit the LP into the Curve Gauge and stake the LP tokens into the Curve Gauge.
-
-It will return:
-
-## Why to use?
-
-## Under the hood
-
-```
-
-```

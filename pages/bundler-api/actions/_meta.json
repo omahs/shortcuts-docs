@@ -1,15 +1,14 @@
 {
-    "route": "Route",
-    "deposit": "Deposit",
-    "harvest": "Harvest",
-    "borrow": "Borrow",
-    "repay": "Repay",
-    "redeem": "Redeem",
-    "apiswap": "API Swap",
-    "swap": "Swap",
-    "transfer": "Transfer",
-    "withdraw": "Withdraw",
-    "approve": "Approve",
-    "permitTransferFrom": "Permit TransferFrom"
+  "route": "Route",
+  "deposit": "Deposit",
+  "apiswap": "API Swap",
+  "harvest": "Harvest",
+  "borrow": "Borrow",
+  "repay": "Repay",
+  "redeem": "Redeem",
+  "swap": "Swap",
+  "transfer": "Transfer",
+  "withdraw": "Withdraw",
+  "approve": "Approve",
+  "permitTransferFrom": "Permit TransferFrom"
 }
-  

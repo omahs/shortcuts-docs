@@ -39,7 +39,7 @@ It returns the following:
 
 ### Execute: Fetch the actions
 
-We are using the [Route action](../../bundler-api/actions/route) inside of the [Bundle endpoint](../../bundler-api/api-reference/overview) as this action compares the best execution route for token amount out, and gas execution price. For example, it might be better to purchase yvWETH on a secondary exchange than directly depositing it depending upon the exchange rate of that token on the secondary market.
+We are using the [Route endpoint](../../router-api/api-reference/overview) as it compares the best execution route for token amount out, and gas execution price. For example, it might be better to purchase yvWETH on a secondary exchange than directly depositing it depending upon the exchange rate of that token on the secondary market.
 Note that the we set `toEoA` to _false_, as we are using a smart wallet.
 
 ```bash copy

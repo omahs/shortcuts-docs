@@ -43,26 +43,27 @@ Both transactions are bundled together in a single one.
 
 ```bash copy
 curl -X POST \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation" \
-  --data '[
-  {
-    "protocol": "enso",
-    "action": "route",
-    "args": {
-      "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-      "tokenOut": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
-      "amountIn": "1000000000"
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation' \
+  -d '[
+    {
+      "protocol": "enso",
+      "action": "route",
+      "args": {
+        "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "tokenOut": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
+        "amountIn": "1000000000"
+      }
+    },
+    {
+      "protocol": "enso",
+      "action": "route",
+      "args": {
+        "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "tokenOut": "0x06325440d014e39736583c165c2963ba99faf14e",
+        "amountIn": "1000000000"
+      }
     }
-  },
-  {
-    "protocol": "enso",
-    "action": "route",
-    "args": {
-      "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-      "tokenOut": "0x06325440d014e39736583c165c2963ba99faf14e",
-      "amountIn": "1000000000"
-    }
-  }]' \
-  "https://api.enso.finance/api/v1/shortcuts/bundle?chainId=<your_chainId>&fromAddress=<your_fromAddress>"
+  ]' \
+  'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
 ```

@@ -1,33 +1,17 @@
 # Route
 
-## Summary
-
 Routing is the action for taking funds from the callers wallet, and converting it into a token, whether that is a [DeFi Position Token](../../concepts/tokens/defiTokens.mdx), or a [Base Token](../../concepts/tokens/baseTokens.mdx).
 
 This endpoint is a pathfinder for determine best price and gas execution across Enso dataset, DEX aggregators, and direct depositing into DeFi protocols.
 
 ## Entering into a DeFi position
 
-With Enso you can simply use Route to obtain the DeFi position token resulting in quick, and easy integration with all the logic for each particular protocol interaction logic abstracted away.
+With Enso you can use Route to obtain the DeFi position token resulting in quick, and easy integration with all the logic for each particular protocol interaction logic abstracted away.
 
 You can use the route action:
 
 1. As an [individual call](../../router-api/introduction.mdx)
 2. Or in a [bundle of calls](../../bundler-api/introduction.mdx)
-
-### Individual call
-
-There are 2 options for using this individual call 1. EOA: Approving the contract for the route 2. Smart Wallets:
-
-#### Approve first
-
-#### Execution
-
-```
-curl --request POST \
-     --url 'http://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0x9008D19f58AAbD9eD0D60971565AA8510560ab41&tokenIn=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2&tokenOut=0x5c6Ee304399DBdB9C8Ef030aB642B10820DB8F56&amountIn=326880000000000000000&tokenInAmountToTransfer=326880000000000000000' \
-     --header 'content-type: application/json' \
-```
 
 ```javascript
 fromAddress: 'Address to use funds from'
@@ -37,7 +21,7 @@ amountIn: 'Raw amount to send'
 tokenInAmountToTransfer: '326880000000000000000'
 ```
 
-## Endpoints
+## Example
 
 ### POST [/api/v1/shortcuts/bundle](../introduction.mdx)
 
@@ -45,26 +29,33 @@ The bundle endpoint enables bundling of many actions into one transaction, and f
 
 For example we can bundle the following operations in one single transaction:
 
-- Convert from BAL and WETH to a Balancer [BAL80WETH20](https://etherscan.io/address/0x5c6Ee304399DBdB9C8Ef030aB642B10820DB8F56)
-- Convert from ETH to the ETH/stEth Curve pool [steCrv](https://etherscan.io/address/0x06325440D014e39736583c165C2963BA99fAf14E)
+- Deposit from ETH to [stEth](https://etherscan.io/address/0xae7ab96520de3a18e5e111b5eaab095312d7fe84)
+- Deposit from ETH to the ETH/stEth Curve pool [steCrv](https://etherscan.io/address/0x06325440D014e39736583c165C2963BA99fAf14E)
 
-```
+```bash copy
 curl -X POST \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation" \
-  --data '[
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation' \
+  -d '[
     {
       "protocol": "enso",
       "action": "route",
       "args": {
-        "slippage": 300,
-        "tokenIn": ["0xba100000625a3754423978a60c9317c58a424e3D", "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"],
-        "tokenOut": "0x5c6Ee304399DBdB9C8Ef030aB642B10820DB8F56",
-        "amountIn": [1000000000, 1000000000],
-        "tokenInAmountToApprove": [1000000000, 1000000000],
+        "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "tokenOut": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
+        "amountIn": "1000000000"
+      }
+    },
+    {
+      "protocol": "enso",
+      "action": "route",
+      "args": {
+        "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "tokenOut": "0x06325440d014e39736583c165c2963ba99faf14e",
+        "amountIn": "1000000000"
       }
     }
   ]' \
-  "https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0x7713974908Be4BEd47172370115e8b1219F4A5f0"
+  'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045'
 
 ```

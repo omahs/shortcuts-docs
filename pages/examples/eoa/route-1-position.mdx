@@ -61,10 +61,10 @@ await ERC20(0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2).approve(address, 5 Ether
 
 ### Execute: Build actions
 
-We are using the [Route action](../../bundler-api/actions/route) inside of the [Bundle endpoint](../../bundler-api/api-reference/overview) as this action compares the best execution route for token amount out, and gas execution price. For example, it might be better to purchase yvWETH on a secondary exchange than directly depositing it depending upon the exchange rate of that token on the secondary market.
+We are using the [Route endpoint](../../router-api/api-reference/overview) as this it compares the best execution route for token amount out, and gas execution price. For example, it might be better to purchase yvWETH on a secondary exchange than directly depositing it depending upon the exchange rate of that token on the secondary market.
 
 ```bash copy
-curl -X POST \
+curl -X GET \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation" \
   "https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&priceImpact=false&toEoa=true&amountIn=1000000000000000000&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&tokenOut=0xae7ab96520de3a18e5e111b5eaab095312d7fe84"
