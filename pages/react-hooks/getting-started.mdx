@@ -1,0 +1,46 @@
+# Enso React Hooks
+
+For easy integration of enso infrastructure, we offer a react hooks library called `use-defi`.
+
+**Features:**
+- Search through available positions on Enso based on tokens and protocols.
+- Easily run transactions without setup.
+- Integrates using `wagmi` to run transactions.
+- Built using typescript.
+
+## Requirements
+
+The following dependencies are required in order to use `use-defi`.
+- `react-dom` & `react` >= 18
+- `react-query` >= 3.39
+- `viem` >= 1.2.15
+- `wagmi` >= 1.3.9
+
+## Getting started
+
+Install as:
+`npm i @ensofinance/use-defi`
+
+### Add context provider
+
+In your application, wrap your page/application components in the `UseDeFiProvider`
+
+Ensure that the `UseDeFiProvider` is added inside the `WagmiConfig` provider.
+
+```tsx
+  // ...
+    <WagmiConfig config={config}>
+      <UseDeFiProvider apiKey="<your api key>">
+        <YourOtherProviders>
+          {children}
+        </YourOtherProviders>
+      </UseDeFiProvider>
+    </WagmiConfig>
+  // ...
+```
+
+### Example
+
+[Code Sandbox](https://codesandbox.io/p/sandbox/determined-gould-8hh436)
+
+<iframe style={{ border: "1px solid rgba(0, 0, 0, 0.1)", borderRadius: "2px" }} width="800" height="800" src="https://codesandbox.io/p/sandbox/determined-gould-8hh436" allowfullscreen></iframe>

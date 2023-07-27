@@ -1,0 +1,89 @@
+# Types
+
+### Token
+```ts
+type Token = {
+  address: string;
+  name: string;
+  symbol: string;
+  decimals: number;
+  chain: number;
+  project: string;
+  protocol: string;
+  poolAddress: string;
+  primaryAddress: string;
+  underlyingPoolTokens: string[];
+}
+```
+
+### Position
+Describes a set of information about a pool or a basetoken that can be executed/entered via a shortcut.
+
+```ts
+type Position = PoolPosition | BasePosition
+```
+
+#### PoolPosition
+Describes positions that are pools with underlying tokens.
+
+```ts
+type PoolPosition = {
+  apy?: number;
+  apyBase?: number;
+  apyReward?: number;
+  chainId: number;
+  id: string;
+  name: string;
+  poolAddress: string;
+  primaryAddress: string;
+  subtitle: string;
+  rewardPoolTokens: string[];
+  token?: Token;
+  tokenAddress: string;
+  tvl: number;
+  underlyingPoolTokens: string[];
+  project: string;
+};
+```
+
+#### BasePosition
+Describes base tokens that can be swapped to.
+
+```ts
+type BasePosition = {
+  chainId: number;
+  name: string;
+  symbol: string;
+  address: string;
+  decimals: number;
+  logoURI: string;
+}
+```
+
+
+#### Route
+Describes a route that was found via the `useExecutePosition` hook.
+
+```ts
+type Route = {
+  amountOut: string;
+  createdAt: number;
+  gas: number;
+  route: Hop[];
+  tx: Transaction;
+}
+```
+
+#### Hop
+Describes a hop taken for a specific route
+
+```ts
+type Hop = {
+  tokenIn: string[];
+  tokenOut: string;
+  positionOutId: string;
+  protocol: string;
+  action: string;
+  primary: string;
+}
+```
