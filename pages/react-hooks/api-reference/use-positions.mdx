@@ -1,0 +1,30 @@
+# `UsePositions` Hook
+
+Hook to retrieve all positions available on Enso infrastructure, with additional filters to search for specific positions.
+
+## Example
+```tsx
+const { data: positions } = usePositions({
+  chain: 1,
+  token: "0x6b175474e89094c44da98b954eedeac495271d0f",
+})
+
+// First result
+console.log(positions[0])
+```
+
+## Options
+
+| Options             | Description                                          | Example                                      |
+|---------------------|------------------------------------------------------|----------------------------------------------|
+| `chain`             | Target chain to filter positions by.                 | 1                                            |
+| `token`             | Token Address to filter by, for token you want out   | `0x6b175474e89094c44da98b954eedeac495271d0f` |
+| `protocol`          | Protocol to filter by, see [this list](https://github.com/EnsoFinance/use-defi/blob/main/src/types/api.ts#L36) for a list of protocol names. | `aave-v2` |
+
+## Response
+
+| Property            | Type          | Description                           | Example Value           |
+|---------------------|---------------|---------------------------------------|-------------------------|
+| `position`          | Position[]    | Position                              |                         |
+| `status`            | LoadingState  | Status of the request                 | `loading`               |
+
