@@ -9,8 +9,17 @@ const { data: positions } = usePositions({
   token: "0x6b175474e89094c44da98b954eedeac495271d0f",
 })
 
-// First result
 console.log(positions[0])
+// First result:
+// {
+//   "name": "Dai Stablecoin",
+//   "symbol": "DAI",
+//   "decimals": 18,
+//   "logoURI": "https://metadata-service.herokuapp.com/api/token/1/0x6b175474e89094c44da98b954eedeac495271d0f/icon",
+//   "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+//   "id": "0x6b175474e89094c44da98b954eedeac495271d0f",
+//   "chainId": 1
+// }
 ```
 
 ## Options
@@ -25,6 +34,6 @@ console.log(positions[0])
 
 | Property            | Type          | Description                           | Example Value           |
 |---------------------|---------------|---------------------------------------|-------------------------|
-| `position`          | Position[]    | Position                              |                         |
+| `position`          | [Position](types#position)[]    | [Position](types#position) |                         |
 | `status`            | LoadingState  | Status of the request                 | `loading`               |
 
