@@ -1,9 +1,9 @@
-import { DocsThemeConfig } from "nextra-theme-docs";
-import { useConfig } from "nextra-theme-docs";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import logo from "./assets/logo_horizontal.png";
-import React from "react";
+import { DocsThemeConfig } from 'nextra-theme-docs'
+import { useConfig } from 'nextra-theme-docs'
+import { useRouter } from 'next/router'
+import Image from 'next/image'
+import logo from './assets/logo_horizontal.png'
+import React from 'react'
 
 const config: DocsThemeConfig = {
   logo: (
@@ -16,28 +16,28 @@ const config: DocsThemeConfig = {
     next: true,
   },
   project: {
-    link: "https://enso.finance",
+    link: 'https://enso.finance',
   },
   chat: {
-    link: "https://t.me/enso_api",
+    link: 'https://t.me/enso_api',
   },
-  docsRepositoryBase: "https://github.com/EnsoFinance/shortcuts-docs",
+  docsRepositoryBase: 'https://github.com/EnsoFinance/shortcuts-docs',
   footer: {
-    text: "Enso Shortcuts Registry Docs",
+    text: 'Enso Shortcuts Registry Docs',
   },
   useNextSeoProps() {
-    const { route } = useRouter();
-    if (route !== "/") {
+    const { route } = useRouter()
+    if (route !== '/') {
       return {
-        titleTemplate: "%s – Enso Docs",
-      };
+        titleTemplate: '%s – Enso Docs',
+      }
     }
   },
 
   head: () => {
-    const { asPath } = useRouter();
-    const { frontMatter } = useConfig();
-    const socialCard = `https://www.enso.finance//_next/static/media/landing-image.64161f56.png`;
+    const { asPath } = useRouter()
+    const { frontMatter } = useConfig()
+    const socialCard = `https://i.imgur.com/xsGIovj.png`
     return (
       <>
         <meta name="msapplication-TileColor" content="#fff" />
@@ -63,11 +63,11 @@ const config: DocsThemeConfig = {
         />
         <meta
           property="og:title"
-          content={frontMatter.title || "Enso Shortcuts API"}
+          content={frontMatter.title || 'Enso Shortcuts API'}
         />
       </>
-    );
+    )
   },
-};
+}
 
-export default config;
+export default config
