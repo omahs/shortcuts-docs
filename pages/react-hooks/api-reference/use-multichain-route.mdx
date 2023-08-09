@@ -1,0 +1,80 @@
+# `UseMultichainRoute` Hook
+
+Used to run shortcuts to bridge to other chains.
+
+## Example
+```tsx
+const { execute } = useMultichainRoute({
+  sourceChainId: 1, // ETH
+  destinationChainId: 42161, // ARB
+  tokenIn: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", // Native ETH
+  tokenOut: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", // Native ARB
+  amount: parseUnits("0.1", 18)
+})
+
+// ...
+    <button onClick={execute}>
+      Execute
+    </button>
+// ...
+```
+
+## Options
+
+### `sourceChainId`
+`number`
+
+ChainID from which to bridge.
+
+**Example:** `{ sourceChainId: 1 }`
+
+### `destinationChainId`
+`number`
+
+ChainID to bridge to.
+
+**Example:** `{ destinationChainId: 42161 }`
+
+### `tokenIn`
+`string`
+
+Tokens to use as input tokens for the shortcut.
+
+Use `0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee` for the chains native token.
+
+**Example:** `{ tokenIn: "0xae7ab96520de3a18e5e111b5eaab095312d7fe84" }`
+
+### `amountIn`
+`string`
+
+Amount to use for the input tokens to run the shortcut.
+
+Convert amount to string before passing to this function. 
+
+Specified amounts must be in the tokens smallest units. For example, for ETH, 1 ETH = 1e18. You can use [`viem`s `parseUnits` function for this](https://viem.sh/docs/utilities/parseUnits.html)
+
+**Example:** `{ amountIn: '1000000000000000000' }`
+
+### `options`
+`{}`
+
+Additional options with sensible defaults.
+
+### `options.slippage`
+`number`
+
+Allowed slippage for this shortcut execution, in base units (1/10000).
+Default is 300 = 3%.
+
+**Example:** `{ options: { slippage: 100 } }`
+
+## Response
+
+The `useMultichainRoute` hook returns multiple data objects to inspect and execute the desired route.
+
+The following properties are available:
+
+- `execute` - Runs the desired multichain route as a shortcut.
+- `tx` - Transaction details including `from`, `to`, `data` and `value`
+- `errorMessage` - Details about errors occurred during route finding.
+- `status` - `success` | `loading` | `error` | `idle`
