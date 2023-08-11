@@ -1,5 +1,6 @@
 {
   "use-positions": "UsePositions",
   "use-execute-position": "UseExecutePosition",
+  "use-multichain-route": "UseMultichainRoute",
   "types": "Types/Schema"
 }
