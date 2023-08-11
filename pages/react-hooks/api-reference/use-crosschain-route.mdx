@@ -1,10 +1,10 @@
-# `UseMultichainRoute` Hook
+# `UseCrossChainRoute` Hook
 
-Used to run shortcuts to bridge to other chains.
+Used to run shortcuts across another chain.
 
 ## Example
 ```tsx
-const { execute } = useMultichainRoute({
+const { execute } = useCrossChainRoute({
   sourceChainId: 1, // ETH
   destinationChainId: 42161, // ARB
   tokenIn: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", // Native ETH
@@ -38,11 +38,20 @@ ChainID to bridge to.
 ### `tokenIn`
 `string`
 
-Tokens to use as input tokens for the shortcut.
+Token to spend on the source chain.
 
 Use `0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee` for the chains native token.
 
 **Example:** `{ tokenIn: "0xae7ab96520de3a18e5e111b5eaab095312d7fe84" }`
+
+### `tokenOut`
+`string`
+
+Tokens to receive on the destination chain.
+
+Use `0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee` for the chains native token.
+
+**Example:** `{ tokenOut: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" }`
 
 ### `amountIn`
 `string`
