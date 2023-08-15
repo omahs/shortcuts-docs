@@ -5,6 +5,8 @@ Depositing is the action for taking funds from the callers wallet into a particu
 1. For many cases you can directly use the [route endpoint](./route.md) to enter into a position than directly using the deposit action. The route endpoint will determine best price and gas router for either depositing directly into the protocol, or buying the position token on a secondary market.
 2. If you are depositing into a protocol you must have the underlying token required for the deposit action. For example if you are attempting to deposit into a Yearn vault that requires WETH and you define DAI as the tokenIn then the transaction will fail. This is a perfect use case for using the [route](./route.md) endpoint.
 
+NOTE: Direct deposit actions doesn't have slippage protection. If you are interacting with a protocol that needs slippage protection use the [route endpoint](./route.md)
+
 ## Example
 
 With Enso you can simply use Deposit for all protocols resulting in quick, and easy integration with all the logic for each particular protocol deposit logic abstracted away.

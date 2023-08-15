@@ -14,11 +14,10 @@ You can use the route action:
 2. Or in a [bundle of calls](../../bundler-api/introduction.mdx)
 
 ```javascript
-fromAddress: 'Address to use funds from'
 tokenIn: 'Address of token to send'
 tokenOut: 'Address of token to receive'
 amountIn: 'Raw amount to send'
-tokenInAmountToTransfer: '326880000000000000000'
+slippage: 'Amount of slippage'
 ```
 
 ## Example
@@ -44,6 +43,8 @@ curl -X POST \
         "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
         "tokenOut": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
         "amountIn": "1000000000"
+        "slippage": 300
+
       }
     },
     {
@@ -53,6 +54,7 @@ curl -X POST \
         "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
         "tokenOut": "0x06325440d014e39736583c165c2963ba99faf14e",
         "amountIn": "1000000000"
+
       }
     }
   ]' \
