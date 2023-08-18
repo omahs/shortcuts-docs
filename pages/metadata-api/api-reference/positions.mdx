@@ -1,0 +1,132 @@
+## GET /v1/positions
+
+Get the Enso supported positions.
+
+This endpoint includes defi tokens, base tokens and non-tokenized positions.
+For more details, see the [position types](/concepts).
+
+#### Example:
+
+```bash copy
+curl -X GET \
+  -H "Accept: application/json" \
+  "https://api.enso.finance/api/v1/positions"
+```
+
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/PositionsController_positions)
+
+#### Optional Query Parameters:
+
+| Query Param         | Description                                   |
+| ------------------- | --------------------------------------------- |
+| `chainId`           | The chainId of the positions to return        |
+| `tokenAddress`      | Address of the token to search for            |
+| `poolAddress`       | Address of the pool to search for             |
+| `symbol`            | Symbol of the token to search for             |
+| `protocol`          | Protocol of the token to search for           |
+| `project`           | Project of the token to search for            |
+| `underlyingAddress` | Address of the underlying token to search for |
+| `name`              | Name of the token to search for               |
+
+#### Response example:
+
+```json
+{
+      "apy": 0.45023,
+      "apyBase": null,
+      "apyReward": null,
+      "chainId": 42161,
+      "id": "42161:0xbbf9d705b75f408cfcaee91da32966124d2c6f7d:0x6a7661795c374c0bfc635934efaddff3a7ee23b6_0xbbf9d705b75f408cfcaee91da32966124d2c6f7d_0xc6eee8cb7643ec2f05f46d569e9ec8ef8b41b389",
+      "name": "Balancer DOLA/bbaUSD StablePool ",
+      "poolAddress": "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
+      "primaryAddress": "0xBA12222222228d8Ba445958a75a0704d566BF2C8",
+      "subtitle": "DOLA/bbaUSD-BPT ",
+      "rewardTokens": [],
+      "token": {
+        "id": "42161:0xbbf9d705b75f408cfcaee91da32966124d2c6f7d",
+        "address": "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
+        "name": "Balancer DOLA/bbaUSD StablePool ",
+        "symbol": "DOLA/bbaUSD-BPT ",
+        "decimals": 18,
+        "chain": 42161,
+        "type": 1,
+        "project": "balancer-v2",
+        "protocol": "balancer-v2",
+        "poolAddress": "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
+        "primaryAddress": "0xBA12222222228d8Ba445958a75a0704d566BF2C8",
+        "underlyingTokens": [
+          "0x6A7661795C374c0bFC635934efAddFf3A7Ee23b6",
+          "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
+          "0xc6EeE8cb7643eC2F05F46d569e9eC8EF8b41b389"
+        ]
+      },
+      "tokenAddress": "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
+      "tvl": 250286,
+      "underlyingTokens": [
+        "0x6A7661795C374c0bFC635934efAddFf3A7Ee23b6",
+        "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
+        "0xc6EeE8cb7643eC2F05F46d569e9eC8EF8b41b389"
+      ],
+      "project": "balancer-v2",
+      "protocol": {
+        "name": "balancer-v2",
+        "slug": "balancer-v2",
+        "logo": "https://icons.llama.fi/balancer-v2.png",
+        "url": "https://balancer.finance/",
+        "description": "Balancer is a protocol for programmable liquidity.",
+        "twitter": "BalancerLabs",
+        "category": "Dexes",
+        "chainIds": [
+          42161
+        ]
+      }
+    },
+    {
+      "apy": 6.54363,
+      "apyBase": null,
+      "apyReward": null,
+      "chainId": 42161,
+      "id": "42161:0x67c38e607e75002cea9abec642b954f27204dda5:0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
+      "name": "MahaLend Arbitrum WETH",
+      "poolAddress": "0x67C38e607e75002Cea9abec642B954f27204dda5",
+      "primaryAddress": "0x88c6a98430Cc833E168430DaC427e9796C9EC576",
+      "subtitle": "mArbWETH",
+      "rewardTokens": [],
+      "token": {
+        "id": "42161:0x67c38e607e75002cea9abec642b954f27204dda5",
+        "address": "0x67C38e607e75002Cea9abec642B954f27204dda5",
+        "name": "MahaLend Arbitrum WETH",
+        "symbol": "mArbWETH",
+        "decimals": 18,
+        "chain": 42161,
+        "type": 1,
+        "project": "mahalend",
+        "protocol": "aave-v2",
+        "poolAddress": "0x67C38e607e75002Cea9abec642B954f27204dda5",
+        "primaryAddress": "0x88c6a98430Cc833E168430DaC427e9796C9EC576",
+        "underlyingTokens": [
+          "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"
+        ]
+      },
+      "tokenAddress": "0x67C38e607e75002Cea9abec642B954f27204dda5",
+      "tvl": 30159,
+      "underlyingTokens": [
+        "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"
+      ],
+      "project": "mahalend",
+      "protocol": {
+        "name": "MahaLend",
+        "url": "http://mahalend.com",
+        "logo": "https://icons.llama.fi/mahalend.png",
+        "slug": "mahalend",
+        "twitter": "mahalend",
+        "description": "MahaLend is a lending protocol that allows you to leverage DeFi yields with ARTH.",
+        "category": "Lending",
+        "chainIds": [
+          42161
+        ]
+      }
+    }
+```
+
+There are four additional endpoint if you are interested only in a specific position type:

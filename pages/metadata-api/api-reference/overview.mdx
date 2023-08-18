@@ -9,7 +9,14 @@ Yield opportunities:
 
 Enso:
 
-- `GET /v1/tokens`: returns all of the tokens supported by the api
+- `GET /v1/positions`: returns all of the positions supported by the api, includes defi tokens, base tokens and non-tokenized position
+- `GET /v1/projects`: return the projects and relevant protocols available to use in the bundle shortcut
+- `GET /v1/networks`: return the networks supported by the API
 - `GET /v1/actions`: returns all of the actions supported by the api, used to get the data needed to use the bundle api
 - `GET /v1/standards`: returns all of the protocols supported by the api
-- `GET /v1/wallet`: return enso wallet details
+
+Wallets:
+
+- `GET /v1/wallet`: return enso smart wallet details
+- `GET /v1/wallet/appprove`: return a transaction that approves the smart wallet to spend the funds
+- `GET /v1/wallet/balances`: return balances of a wallet

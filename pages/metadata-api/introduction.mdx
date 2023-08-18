@@ -18,64 +18,67 @@ With the Metadata API, you get an easy-to-use, reliable tool that simplifies you
   Try it out:
 </Callout>
 
-👉 Run this curl request to see all the tokens supported by ENSO:
+👉 Run this curl request to see all the tokens and positions supported by ENSO:
 
 ```bash copy
 curl -X 'GET' \
-  'https://api.enso.finance/api/v1/tokens'
+  'https://api.enso.finance/api/v1/positions' \
 ```
 
-👉 Or Try it on [swagger](https://api.enso.finance/api#/metadata/TokensController_findAll)
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/PositionsController_positions)
 
 Will return a response like this:
 
 ```json
-[
-  {
-    "address": "0xb715808a78f6041e46d61cb123c9b4a27056ae9c",
-    "chainId": 43114,
-    "name": "Benqi USDCn",
-    "symbol": "qiUSDCn",
-    "decimals": 8,
-    "protocolName": "compound",
-    "poolAddress": "0xb715808a78f6041e46d61cb123c9b4a27056ae9c",
-    "primaryAddress": "0xb715808a78f6041e46d61cb123c9b4a27056ae9c",
-    "underlyingTokens": [
-      "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e"
-    ],
-    "sanitized": true,
-    "protocol": "compound"
-  },
-  {
-    "address": "0x25212df29073fffa7a67399acefc2dd75a831a1a",
-    "chainId": 1,
-    "name": "Curve EURS Pool yVault",
-    "symbol": "yvCurve-EURS",
-    "decimals": 18,
-    "protocolName": "yearn-finance",
-    "poolAddress": "0x25212df29073fffa7a67399acefc2dd75a831a1a",
-    "primaryAddress": "0x25212df29073fffa7a67399acefc2dd75a831a1a",
-    "underlyingTokens": [
-      "0x194ebd173f6cdace046c53eacce9b953f28411d1"
-    ],
-    "sanitized": true,
-    "protocol": "yearn-finance"
-  },
-  {
-    "address": "0xd9788f3931ede4d5018184e198699dc6d66c1915",
-    "chainId": 1,
-    "name": "AAVE yVault",
-    "symbol": "yvAAVE",
-    "decimals": 18,
-    "protocolName": "yearn-finance",
-    "poolAddress": "0xd9788f3931ede4d5018184e198699dc6d66c1915",
-    "primaryAddress": "0xd9788f3931ede4d5018184e198699dc6d66c1915",
-    "underlyingTokens": [
-      "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9"
-    ],
-    "sanitized": true,
-    "protocol": "yearn-finance"
-  },
-  .....
-]
+{
+      "apy": 0.45023,
+      "apyBase": null,
+      "apyReward": null,
+      "chainId": 42161,
+      "id": "42161:0xbbf9d705b75f408cfcaee91da32966124d2c6f7d:0x6a7661795c374c0bfc635934efaddff3a7ee23b6_0xbbf9d705b75f408cfcaee91da32966124d2c6f7d_0xc6eee8cb7643ec2f05f46d569e9ec8ef8b41b389",
+      "name": "Balancer DOLA/bbaUSD StablePool ",
+      "poolAddress": "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
+      "primaryAddress": "0xBA12222222228d8Ba445958a75a0704d566BF2C8",
+      "subtitle": "DOLA/bbaUSD-BPT ",
+      "rewardTokens": [],
+      "token": {
+        "id": "42161:0xbbf9d705b75f408cfcaee91da32966124d2c6f7d",
+        "address": "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
+        "name": "Balancer DOLA/bbaUSD StablePool ",
+        "symbol": "DOLA/bbaUSD-BPT ",
+        "decimals": 18,
+        "chain": 42161,
+        "type": 1,
+        "project": "balancer-v2",
+        "protocol": "balancer-v2",
+        "poolAddress": "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
+        "primaryAddress": "0xBA12222222228d8Ba445958a75a0704d566BF2C8",
+        "underlyingTokens": [
+          "0x6A7661795C374c0bFC635934efAddFf3A7Ee23b6",
+          "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
+          "0xc6EeE8cb7643eC2F05F46d569e9eC8EF8b41b389"
+        ]
+      },
+      "tokenAddress": "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
+      "tvl": 250286,
+      "underlyingTokens": [
+        "0x6A7661795C374c0bFC635934efAddFf3A7Ee23b6",
+        "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
+        "0xc6EeE8cb7643eC2F05F46d569e9eC8EF8b41b389"
+      ],
+      "project": "balancer-v2",
+      "protocol": {
+        "name": "balancer-v2",
+        "slug": "balancer-v2",
+        "logo": "https://icons.llama.fi/balancer-v2.png",
+        "url": "https://balancer.finance/",
+        "description": "Balancer is a protocol for programmable liquidity.",
+        "twitter": "BalancerLabs",
+        "category": "Dexes",
+        "chainIds": [
+          42161
+        ]
+      }
+    },
+    ...
 ```
