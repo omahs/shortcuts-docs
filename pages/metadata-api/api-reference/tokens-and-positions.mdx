@@ -1,3 +1,5 @@
+# Tokens and Positions
+
 ## GET /v1/positions
 
 Get the Enso supported positions.
@@ -129,4 +131,46 @@ curl -X GET \
     }
 ```
 
-There are four additional endpoint if you are interested only in a specific position type:
+There are three additional endpoint if you are interested only in a specific position type:
+
+## Defi Tokens
+
+Returns defi tokens available in the bundle endpoint
+
+#### Example:
+
+```bash copy
+curl -X GET \
+  -H "Accept: application/json" \
+  "https://api.enso.finance/api/v1/defiTokens"
+```
+
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/DefiTokensController_defiTokens)
+
+## Base Tokens
+
+Returns base tokens available in the bundle endpoint
+
+#### Example:
+
+```bash copy
+curl -X GET \
+  -H "Accept: application/json" \
+  "https://api.enso.finance/api/v1/baseTokens"
+```
+
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/BaseTokensController_baseTokens)
+
+## Tokenless Positions
+
+Currently in development, returns tokenless positions available in the bundle endpoint
+
+#### Example:
+
+```bash copy
+curl -X GET \
+  -H "Accept: application/json" \
+  "https://api.enso.finance/api/v1/tokenless-positions"
+```
+
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/TokenlessPositionsController_tokenlessPositions)

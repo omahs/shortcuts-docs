@@ -2,16 +2,12 @@
 
 ## Summary
 
-DeFi tokens are tokens that represent a DeFi position. DeFi tokens are obtained by depositing underlying tokens, or other DeFi tokens inside of [DeFi protocols](../protocols). 
+DeFi tokens are tokens that represent a DeFi position. DeFi tokens are obtained by depositing underlying tokens, or other DeFi tokens inside of [DeFi protocols](../protocols).
 
 For example, depositing [WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) into [Yearn](https://yearn.finance/) you will obtain [yvWETH](https://etherscan.io/token/0xa258C4606Ca8206D8aA700cE2143D7db854D168c) and start generating yield on this.
 
 ## Endpoints
 
-To obtain DeFi positions tokens you can use:
-    1. [route](../../router-api/introduction) singular endpoint
-    2. [route action](../../bundler-api/actions/route) inside of the [bundler endpoint](../../bundler-api/introduction)
-    3. [deposit action](../../bundler-api/actions/deposit) inside of the [bundler endpoint](../../bundler-api/api-reference/introduction)
+To obtain DeFi positions tokens you can use: 1. [route](../../router-api/introduction) singular endpoint 2. [route action](../../bundler-api/actions/route) inside of the [bundler endpoint](../../bundler-api/introduction) 3. [deposit action](../../bundler-api/actions/deposit) inside of the [bundler endpoint](../../bundler-api/api-reference/introduction)
 
 ### GET [/api/v1/defiTokens](https://enso-scrape.s3.us-east-2.amazonaws.com/output/backend/defiTokens.json)
-This endpoint returns all DeFi position tokens that are possible through Enso.  You can fetch the current [.json](https://enso-scrape.s3.us-east-2.amazonaws.com/output/backend/defiTokens.json).  A dedicated endpoint will be live in the following days.
