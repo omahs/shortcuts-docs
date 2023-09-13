@@ -1,0 +1,45 @@
+## GET /v1/standards
+
+Get all the Enso supported projects and their metadata
+
+#### Response:
+
+```json
+[
+  {
+    "title": "aave-v3",
+    "id": "aave-v3",
+    "chainIds": "1,10,137,42161",
+    "logo": "https://icons.llama.fi/aave-v3.png",
+    "url": "https://aave.com",
+    "description": "Earn interest, borrow assets, and build applications",
+    "twitter": "AaveAave",
+    "category": "Lending",
+    "poolCount": 43,
+    "protocol": "aave-v3"
+  },
+  {
+    "title": "aave-v2",
+    "id": "aave-v2",
+    "chainIds": "1,137",
+    "logo": "https://icons.llama.fi/aave-v2.png",
+    "url": "https://aave.com\r\n",
+    "description": "Aave is an Open Source and Non-Custodial protocol to earn interest on deposits and borrow assets",
+    "twitter": "AaveAave",
+    "category": "Lending",
+    "poolCount": 19,
+    "protocol": "aave-v2"
+  }
+  .......
+]
+```
+
+Example
+
+```bash copy
+curl -X GET \
+  -H "Accept: application/json" \
+  "https://api.enso.finance/api/v1/projects"
+```
+
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/ProjectsController_projects)
