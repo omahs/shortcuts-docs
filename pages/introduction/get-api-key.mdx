@@ -36,9 +36,10 @@ Once you've created your key test the [route endpoint](../router-api/introductio
 
 To find all the networks support by Enso, use the [networks endpoint](../concepts/networks.mdx).
 
-```
-// Replace the API key in the header with your API key
-curl -X POST \
+Replace the API key in the header with your API key
+
+```bash copy
+curl -X GET \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <API_KEY>" \
   "http://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0x9008D19f58AAbD9eD0D60971565AA8510560ab41&tokenIn=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2&tokenOut=0x5c6Ee304399DBdB9C8Ef030aB642B10820DB8F56&amountIn=326880000000000000000&tokenInAmountToTransfer=326880000000000000000"
